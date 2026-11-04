@@ -1,4 +1,4 @@
-/* RE·TAIL website. Tokens from src/theme/retail.ts (the app's design system). */
+/* Re·Tail website. Tokens from src/theme/retail.ts (the app's design system). */
 :root {
   --pine: #0F2226;
   --em600: #15613D;
@@ -47,7 +47,7 @@ p { margin: 0; }
 .dot { color: var(--em400); }
 .wrap { width: min(1200px, 100% - 40px); margin: 0 auto; }
 
-/* Wordmark: RE·TAIL in Poppins ExtraBold, like the app header */
+/* Wordmark: Re·Tail in Poppins ExtraBold, like the app header */
 .logo { font: 800 20px/1 var(--display); letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; }
 .logo .dot { margin: 0 0.02em; }
 
