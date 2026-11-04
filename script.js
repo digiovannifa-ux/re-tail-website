@@ -1,4 +1,5 @@
 // Scroll-driven hero (phone screens + floating cards) and the word-by-word manifesto.
+// Runs after app-ui.js, which draws the phone screens.
 (() => {
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   // 0 when the section's top reaches the top of the viewport, 1 when its sticky part ends.
@@ -8,13 +9,14 @@
   };
 
   const hero = document.querySelector('.hero');
-  const screens = [...document.querySelectorAll('.scr')];
+  const phone = document.getElementById('phone');
+  const screens = [...phone.querySelectorAll('.scr')];
   const floats = [...document.querySelectorAll('.float')];
   const parallax = [...document.querySelectorAll('[data-par]')];
-  const phone = document.getElementById('phone');
+  const bars = [...document.querySelectorAll('.bars i')];
   const stepN = document.getElementById('stepN');
   const stepT = document.getElementById('stepT');
-  const STEPS = ['Cerca il capo', 'Trova il negozio', 'Prenota e provalo'];
+  const STEPS = ['Cerca il capo', 'Scegli la taglia', 'Prenota la visita', 'Provalo in negozio'];
 
   // Manifesto: split into words; *word* marks the green ones.
   const reveal = document.getElementById('reveal');
@@ -29,10 +31,11 @@
   let step = -1;
   const frame = () => {
     const p = progress(hero);
-    const s = p < 0.34 ? 0 : p < 0.67 ? 1 : 2;
+    const s = Math.min(screens.length - 1, Math.floor(p * screens.length));
     if (s !== step) {
       step = s;
       screens.forEach((el, i) => el.classList.toggle('on', i === s));
+      bars.forEach((el, i) => el.classList.toggle('on', i <= s));
       stepN.textContent = '0' + (s + 1);
       stepT.textContent = STEPS[s];
     }
@@ -62,12 +65,12 @@
 
   // Typing effect in the search bar of the first screen.
   const typed = document.getElementById('typed');
-  const queries = ['cappotto lana 42', 'sneakers bianche 42', 'maglione a coste M'];
+  const queries = ['cappotto', 'cappotto in lana', 'giacca'];
   let q = 0;
   const type = (text, i = 0) => {
     typed.textContent = text.slice(0, i);
-    if (i < text.length) return setTimeout(() => type(text, i + 1), 70);
-    setTimeout(() => type(queries[(q = (q + 1) % queries.length)]), 2200);
+    if (i < text.length) return setTimeout(() => type(text, i + 1), 90);
+    setTimeout(() => type(queries[(q = (q + 1) % queries.length)]), 2400);
   };
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) type(queries[0]);
 

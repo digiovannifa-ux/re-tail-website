@@ -27,61 +27,45 @@
 <!-- HERO: giant words, the phone in the middle, app cards floating around it. The phone screen changes as you scroll. -->
 <header class="hero" id="top">
   <div class="stick">
+    <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
     <h1 class="giant top" data-par="-0.12">La moda</h1>
     <div class="giant bot" data-par="0.12" aria-hidden="true">vicina<span class="em">.</span></div>
 
-    <p class="hero-sub"><strong>Re·Tail</strong> ti dice quale negozio vicino a te ha il capo che cerchi, nella tua taglia, adesso.</p>
-    <div class="hero-step" aria-live="polite"><div class="n" id="stepN">01</div><div class="t" id="stepT">Cerca il capo</div></div>
-
-    <div class="phone" id="phone" aria-hidden="true">
-      <div class="screen">
-        <!-- 1 · Search -->
-        <div class="scr on">
-          <div class="s-head"><span class="logo">Re<span class="dot">·</span>Tail</span><span class="s-pin"></span></div>
-          <div class="s-body">
-            <div class="s-search"><i></i><span id="typed">cappotto lana 42</span><span class="caret"></span></div>
-            <div class="s-label">Disponibile vicino a te · Bari</div>
-            <div class="s-res"><img src="media/foto/cappotto.jpg" alt=""><div><b>Cappotto in lana</b><span>Boutique Sparano · 700 m</span><em>● Taglia 42 disponibile</em></div></div>
-            <div class="s-res"><img src="media/foto/maglia.jpg" alt=""><div><b>Maglione a coste</b><span>Atelier Piccinni · 1,2 km</span><em>● Taglia M disponibile</em></div></div>
-            <div class="s-res"><img src="media/foto/sneakers.jpg" alt=""><div><b>Sneakers in pelle</b><span>Corso 41 · 1,8 km</span><em>● Taglia 42 disponibile</em></div></div>
-          </div>
-          <div class="s-nav"><span class="on">HOME</span><span>CERCA</span><span>MAPPA</span><span>WISHLIST</span><span>IO</span></div>
-        </div>
-        <!-- 2 · Product -->
-        <div class="scr">
-          <div class="s-head"><span class="logo">Re<span class="dot">·</span>Tail</span><span class="s-pin"></span></div>
-          <div class="s-body">
-            <img class="s-prod" src="media/foto/cappotto.jpg" alt="">
-            <div class="s-title">Cappotto in lana</div>
-            <div style="color:var(--text2)">Boutique Sparano · Via Sparano · 700 m</div>
-            <div class="s-sizes"><span class="no">38</span><span>40</span><span class="sel">42</span><span>44</span><span class="no">46</span></div>
-            <div style="color:var(--em500);font-weight:700">● Disponibile ora in negozio</div>
-            <div class="s-btn">Prenota in negozio</div>
-          </div>
-        </div>
-        <!-- 3 · Booking confirmed -->
-        <div class="scr">
-          <div class="s-head"><span class="logo">Re<span class="dot">·</span>Tail</span><span class="s-pin"></span></div>
-          <div class="s-body">
-            <div class="s-ok"></div>
-            <div class="s-center"><div class="s-label">Visita prenotata</div><div class="s-code">RT-2048</div><span style="color:var(--text2)">Mostra il codice in negozio</span></div>
-            <div class="s-card"><span>Negozio</span><b>Boutique Sparano</b></div>
-            <div class="s-card"><span>Quando</span><b>Oggi · 18:00–19:00</b></div>
-            <div class="s-card"><span>Capo</span><b>Cappotto · 42</b></div>
-            <div class="s-qr"></div>
-          </div>
-        </div>
-      </div>
+    <div class="hero-sub">
+      <p><strong>Re·Tail</strong> ti dice quale negozio vicino a te ha il capo che cerchi, nella tua taglia, adesso.</p>
+      <div class="hero-cta"><a class="btn" href="#come-funziona">Come funziona</a><a class="btn ghost" href="#negozi">Sei un negozio?</a></div>
+    </div>
+    <div class="hero-step" aria-live="polite">
+      <div class="n" id="stepN">01</div><div class="t" id="stepT">Cerca il capo</div>
+      <div class="bars"><i></i><i></i><i></i><i></i></div>
     </div>
 
-    <div class="float f-avail" data-at="0.04" data-par="-0.2">Disponibile · Taglia 42</div>
-    <div class="float f-store" data-at="0.12" data-par="0.18"><span class="av">BS</span><span><b>Boutique Sparano</b><small>Via Sparano · 700 m</small></span></div>
-    <div class="float f-open" data-at="0.3" data-par="-0.15"><span class="k">Aperto ora</span><b>09:30 – 20:00</b></div>
-    <div class="float f-zero" data-at="0.42" data-par="0.25">Zero attese.</div>
-    <div class="float f-chat" data-at="0.55" data-par="-0.1"><span class="k">Boutique Sparano</span>Ciao! Te lo teniamo da parte fino alle 19 🙂</div>
-    <div class="float f-code" data-at="0.7" data-par="0.15">Codice <b>RT-2048</b></div>
+    <div class="device hero-phone" id="phone" data-screens="search product schedule pickup" aria-hidden="true"></div>
+
+    <div class="float f-prod" data-at="0" data-par="-0.2">
+      <img src="media/app/cappotto-beige.jpg" alt="">
+      <span><small>Corallo</small><b>Cappotto in lana · 42</b><em><i></i>Disponibile in 3 negozi</em></span>
+    </div>
+    <div class="float f-store" data-at="0.12" data-par="0.18">
+      <span class="av">SL</span><span><b>Sartoria Levante</b><small>Via Argiro 48 · 650 m</small></span><em>Ora aperto</em>
+    </div>
+    <div class="float f-zero" data-at="0.3" data-par="-0.15">Zero attese.</div>
+    <div class="float f-notif" data-at="0.48" data-par="0.08">
+      <img src="apple-touch-icon.png" alt="">
+      <span><small><b>Re·Tail</b><time>ora</time></small><b>Promemoria visita</b>Tra un'ora da Sartoria Levante: il cappotto ti aspetta in camerino.</span>
+    </div>
+    <div class="float f-chat" data-at="0.62" data-par="-0.1"><span class="k">Sartoria Levante</span>Te lo mettiamo in camerino anche in blu 🙂</div>
+    <div class="float f-code" data-at="0.78" data-par="0"><span data-qr="RT-2048" data-size="44"></span><span><small>Codice visita</small><b>RT-2048</b></span></div>
   </div>
 </header>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="tk">
+    <span>Disponibile nella tua taglia</span><span>Prenota la visita</span><span>Provalo in negozio</span><span>Zero commissioni</span><span>Negozi di quartiere</span><span>Chat con il negozio</span>
+    <span>Disponibile nella tua taglia</span><span>Prenota la visita</span><span>Provalo in negozio</span><span>Zero commissioni</span><span>Negozi di quartiere</span><span>Chat con il negozio</span>
+  </div>
+</div>
 
 <!-- MANIFESTO: one sentence revealed word by word over a shop video -->
 <section class="manifesto" id="perche">
@@ -92,15 +76,40 @@
   </div>
 </section>
 
+<!-- INSIDE THE APP: three real screens -->
+<section class="inside" id="app">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">02 / Dentro l'app</span><h2>La tua città,<br><span class="g">in tasca.</span></h2></div>
+      <p>Mappa dei negozi, vetrine sempre aggiornate e una chat diretta con chi vende. Tutto quello che serve per uscire di casa sapendo già dove andare.</p>
+    </div>
+    <div class="trio">
+      <figure>
+        <div class="device" data-screens="map" aria-hidden="true"></div>
+        <figcaption><span class="num">Mappa</span><b>I negozi intorno a te</b><p>Filtra per reparto e categoria e scegli il raggio: 2, 5 o 10 km.</p></figcaption>
+      </figure>
+      <figure class="mid">
+        <div class="device" data-screens="store" aria-hidden="true"></div>
+        <figcaption><span class="num">Negozio</span><b>Ogni vetrina, aperta</b><p>Orari, indirizzo e i capi che ci sono adesso, taglia per taglia.</p></figcaption>
+      </figure>
+      <figure>
+        <div class="device" data-screens="chat" aria-hidden="true"></div>
+        <figcaption><span class="num">Chat</span><b>Chiedi prima di uscire</b><p>Un colore diverso, un'altra taglia: il negozio ti risponde in app.</p></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- NUMBERS -->
 <section class="numbers">
   <div class="wrap">
-    <span class="eyebrow">02 / Il contesto</span>
+    <span class="eyebrow">03 / Il contesto</span>
     <h2>La moda in Italia si compra ancora <span class="g">in negozio</span>. Ma i negozi, online, non si vedono.</h2>
-    <div class="stats">
-      <div class="stat"><div class="big">75<small>–80%</small></div><p>della spesa in abbigliamento in Italia passa ancora dai <b>negozi fisici</b>.</p></div>
-      <div class="stat"><div class="big">164<small>mila</small></div><p>negozi di abbigliamento nel Paese. Quasi nessuno mostra online <b>cosa ha in negozio, e in che taglia</b>.</p></div>
-      <div class="stat"><div class="big">0<small>%</small></div><p>di commissioni sulle vendite. Il capo lo compri <b>in negozio, dal negoziante</b>, come sempre.</p></div>
+    <div class="bento">
+      <div class="bx a"><div class="big">75<small>–80%</small></div><p>della spesa in abbigliamento in Italia passa ancora dai <b>negozi fisici</b>.</p></div>
+      <div class="bx b"><div class="big">164<small>mila</small></div><p>negozi di abbigliamento. Quasi nessuno mostra online <b>cosa ha, e in che taglia</b>.</p></div>
+      <div class="bx c"><div class="big">0<small>%</small></div><p>di commissioni sulle vendite. Il capo lo compri <b>dal negoziante</b>, come sempre.</p></div>
+      <div class="bx d"><img src="media/foto/negozio-6.jpg" alt="" loading="lazy"><p><span class="k">Il punto</span>Non serve un altro e-commerce. Serve sapere <b>cosa c'è dietro l'angolo</b>.</p></div>
     </div>
     <p class="source">Fonte: elaborazione Re·Tail su dati ISTAT e Deloitte.</p>
   </div>
@@ -109,7 +118,7 @@
 <!-- SHOPS MARQUEE -->
 <section class="shops" aria-label="I negozi">
   <div class="wrap shops-head">
-    <div><span class="eyebrow">03 / I negozi</span><h2>Boutique, multimarca,<br>botteghe di quartiere.</h2></div>
+    <div><span class="eyebrow">04 / I negozi</span><h2>Boutique, multimarca,<br>botteghe di quartiere.</h2></div>
     <p>Stock e taglie aggiornati dal negozio. Quando trovi il capo, sai già dove andare e quando è aperto.</p>
   </div>
   <div class="row" aria-hidden="true">
@@ -125,22 +134,22 @@
 <!-- HOW IT WORKS -->
 <section class="how" id="come-funziona">
   <div class="wrap">
-    <span class="eyebrow">04 / Come funziona</span>
-    <h2>Cerca.<br>Prenota.<br>Provalo.</h2>
+    <span class="eyebrow">05 / Come funziona</span>
+    <h2>Cerca.<br>Prenota.<br><span class="g">Provalo.</span></h2>
     <div class="steps">
       <div class="step">
         <div class="media">
           <video src="media/appendini.mp4" poster="media/appendini.jpg" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="chip green"><span class="k">3 negozi vicino a te</span><b>● Taglia M disponibile</b></div>
+          <div class="chip avail"><span class="k"><i></i>Disponibile in 3 negozi</span><b>Taglia M · entro 10 km da te</b></div>
         </div>
         <div><span class="num">01</span><h3>Cerca il capo, non il negozio.</h3><p>Scrivi cosa cerchi, scegli la taglia. Re·Tail ti mostra i negozi della tua città che ce l'hanno davvero, con distanza e orari. Puoi sfogliare tutto il catalogo anche senza account.</p></div>
       </div>
       <div class="step">
         <div class="media">
           <video src="media/stender.mp4" poster="media/stender.jpg" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="chip code"><span class="k">Visita prenotata · oggi 18:00</span><b>RT-2048</b></div>
+          <div class="chip code"><span data-qr="RT-2048" data-size="54"></span><span><span class="k">Visita prenotata · oggi 18:00</span><b>RT-2048</b></span></div>
         </div>
-        <div><span class="num">02</span><h3>Prenota la visita.</h3><p>Scegli il giorno e la fascia oraria. Il negozio tiene da parte i capi nella tua taglia fino alla fine della visita e ti arriva un promemoria un'ora prima. Nessun pagamento in app.</p></div>
+        <div><span class="num">02</span><h3>Prenota la visita.</h3><p>Scegli il giorno e la fascia oraria. Il negozio sa che arrivi e ti prepara i capi nella tua taglia; un'ora prima ti arriva un promemoria. Nessun pagamento in app.</p></div>
       </div>
       <div class="step">
         <div class="media">
@@ -152,7 +161,7 @@
           <p>Mostra il codice, prova il capo e decidi con calma. Hai una domanda prima di uscire? Scrivi al negozio in chat.</p>
           <div class="bubbles">
             <div class="bub me">Avete anche il blu in 42?</div>
-            <div class="bub them"><small>Boutique Sparano</small>Sì, ce n'è uno. Lo mettiamo con l'altro, così li provi entrambi.</div>
+            <div class="bub them"><small>Sartoria Levante</small>Sì, ce n'è uno. Lo mettiamo con l'altro, così li provi entrambi.</div>
           </div>
         </div>
       </div>
@@ -164,14 +173,22 @@
 <section class="forstores" id="negozi">
   <video class="bgvid" src="media/stender.mp4" poster="media/stender.jpg" autoplay muted loop playsinline preload="metadata"></video>
   <div class="wrap">
-    <span class="eyebrow">05 / Per i negozi</span>
+    <span class="eyebrow">06 / Per i negozi</span>
     <h2>Non vendiamo prodotti. <span class="g">Rendiamo visibile il tuo negozio.</span></h2>
-    <div class="zeros">
-      <div class="zero"><b>Zero commissioni</b><p>Il cliente compra da te, alla cassa, come sempre. Non prendiamo percentuali sulle vendite.</p></div>
-      <div class="zero"><b>Zero logistica</b><p>Niente spedizioni, resi o magazzini esterni. Il capo resta sul tuo appendiabiti finché il cliente non entra.</p></div>
-      <div class="zero"><b>Clienti in negozio</b><p>Ricevi prenotazioni con capo, taglia e orario, rispondi in chat e vedi cosa cercano le persone della tua zona.</p></div>
+    <div class="fs-grid">
+      <div>
+        <div class="zeros">
+          <div class="zero"><b>Zero commissioni</b><p>Il cliente compra da te, alla cassa, come sempre. Non prendiamo percentuali sulle vendite.</p></div>
+          <div class="zero"><b>Zero logistica</b><p>Niente spedizioni, resi o magazzini esterni. Il capo resta sul tuo appendiabiti finché il cliente non entra.</p></div>
+          <div class="zero"><b>Clienti in negozio</b><p>Ricevi le visite con capo, taglia e orario, rispondi in chat e vedi cosa cercano le persone della tua zona.</p></div>
+        </div>
+        <a class="cta" href="mailto:info@re-tail.it?subject=Il%20mio%20negozio%20su%20Re%C2%B7Tail">Porta il tuo negozio su Re·Tail →</a>
+      </div>
+      <div class="fs-phone">
+        <div class="device" data-screens="partner" aria-hidden="true"></div>
+        <div class="toast"><span class="av">GM</span><span><small>Nuova visita · 18:00</small><b>Giulia M. · Cappotto Corallo 42</b></span></div>
+      </div>
     </div>
-    <a class="cta" href="mailto:info@re-tail.it?subject=Il%20mio%20negozio%20su%20Re%C2%B7Tail">Porta il tuo negozio su Re·Tail →</a>
   </div>
 </section>
 
@@ -179,21 +196,22 @@
 <section class="cities">
   <img src="media/foto/via-2.jpg" alt="" loading="lazy">
   <div class="in">
-    <span class="eyebrow" style="color:var(--mint200)">06 / Dove</span>
+    <span class="eyebrow" style="color:var(--mint200)">07 / Dove</span>
     <h2 style="margin-top:18px">Città per città.</h2>
-    <div class="city-list"><span>Bari</span><span>Milano</span><span>Roma</span><span>Firenze</span><span>Napoli</span><span>Torino</span></div>
+    <p>Partiamo da Bari, un quartiere alla volta. Poi le altre.</p>
+    <div class="city-list"><span class="on"><i></i>Bari</span><span>Milano</span><span>Roma</span><span>Firenze</span><span>Napoli</span><span>Torino</span></div>
   </div>
 </section>
 
 <!-- DOWNLOAD -->
 <section class="download">
   <div class="wrap">
-    <span class="eyebrow">07 / L'app</span>
-    <h2 style="margin-top:18px">Il tuo prossimo capo<br>è dietro l'angolo.</h2>
+    <span class="eyebrow">08 / L'app</span>
+    <h2 style="margin-top:18px">Il tuo prossimo capo<br>è dietro <span class="g">l'angolo.</span></h2>
     <p>Re·Tail arriva presto su iPhone e Android. Sei un negozio e vuoi esserci dal primo giorno? Scrivici.</p>
     <div class="stores-btns">
-      <span class="soon"><small>Presto su</small><b>App Store</b></span>
-      <span class="soon"><small>Presto su</small><b>Google Play</b></span>
+      <span class="soon"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.3 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.8zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Presto su</small><b>App Store</b></span></span>
+      <span class="soon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.6 2.3 13.4 12l-9.8 9.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#2EA869"/><path d="m16.7 8.7-3.3 3.3-9.8-9.7c.3-.2.8-.2 1.2 0z" fill="#9FF0C4"/><path d="m16.7 15.3-11.9 6.4c-.4.2-.9.2-1.2 0l9.8-9.7z" fill="#D75BA0"/><path d="m20.4 10.7-3.7-2-3.3 3.3 3.3 3.3 3.7-2c1-.6 1-2 0-2.6z" fill="#F5C64A"/></svg><span><small>Presto su</small><b>Google Play</b></span></span>
     </div>
     <a class="cta dark" href="mailto:info@re-tail.it">Contattaci →</a>
   </div>
@@ -206,10 +224,11 @@
       <div><h4>Re·Tail</h4><ul><li><a href="#come-funziona">Come funziona</a></li><li><a href="#negozi">Per i negozi</a></li><li><a href="mailto:info@re-tail.it">info@re-tail.it</a></li></ul></div>
       <div><h4>Legale</h4><ul><li><a href="privacy.html">Informativa privacy</a></li><li><a href="termini.html">Termini di servizio</a></li></ul></div>
     </div>
-    <div class="legal"><span>© 2026 Re·Tail</span><span>Foto: <a href="https://unsplash.com/license">Unsplash</a> · Video: <a href="https://www.pexels.com/license/">Pexels</a></span></div>
+    <div class="legal"><span>© 2026 Re·Tail · Negozi, marchi e capi nelle schermate sono di esempio.</span><span>Foto: <a href="https://unsplash.com/license">Unsplash</a> · Video: <a href="https://www.pexels.com/license/">Pexels</a></span></div>
   </div>
 </footer>
 
+<script src="app-ui.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
