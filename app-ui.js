@@ -81,8 +81,9 @@
       <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.8" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2.5"/><path d="M25 4.5v4c.8-.3 1.4-1.1 1.4-2s-.6-1.7-1.4-2z" opacity=".45"/></svg>
     </span></div>`;
   const wordmark = `<span class="wm">RE<i>·</i>TAIL</span>`;
-  const headTab = (extra = '') => `
-    <div class="hd"><div class="hd-row">${wordmark}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
+  // Home shows the wordmark; the other tabs show the section name in its place, as in the app.
+  const headTab = (extra = '', title = '') => `
+    <div class="hd"><div class="hd-row">${title ? `<span class="wm-t">${title}<i>.</i></span>` : wordmark}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
   const headPush = (extra = '') => `
     <div class="hd push"><div class="hd-row">${ic('back', 26, '#11110F', 1.8)}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
   const TABS = [['home', 'Home'], ['search', 'Cerca'], ['tag', 'Brand'], ['map', 'Mappa'], ['heart', 'Wishlist'], ['user', 'Io']];
@@ -120,7 +121,7 @@
   const S = {};
 
   S.search = () => `
-    ${headTab(`<div class="hd-search">${ic('search', 20, '#9A968B', 1.7)}<span id="typed">cappotto</span><span class="caret"></span></div>`)}
+    ${headTab(`<div class="hd-search">${ic('search', 20, '#9A968B', 1.7)}<span id="typed">cappotto</span><span class="caret"></span></div>`, 'Cerca')}
     <div class="bd">
       <div class="crumb">Donna · Risultati</div>
       <div class="ttl">Cappotti e giacche</div>
@@ -181,7 +182,7 @@
     ${nav('home')}`;
 
   S.map = () => `
-    ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · raggio <b>10 km</b></span><em>Cambia</em></div>`)}
+    ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · raggio <b>10 km</b></span><em>Cambia</em></div>`, 'Mappa')}
     <div class="bd">
       <div class="chips"><span class="on">Tutti</span><span>Uomo</span><span>Donna</span><span>Bambino</span></div>
       <div class="mapbox">${streetMap(pinAt(120, 92, 'SL', true) + pinAt(250, 130, 'BV') + pinAt(318, 70, 'AC') + pinAt(78, 190, 'SM'))}

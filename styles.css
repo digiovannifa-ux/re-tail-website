@@ -130,6 +130,8 @@ figure { margin: 0; }
 .hd-ic { display: flex; gap: 18px; }
 .wm { font: 800 22px/1 var(--display); letter-spacing: -.03em; }
 .wm i { font-style: normal; color: var(--em500); }
+.wm-t { font: 800 27px/1 var(--display); letter-spacing: -.035em; color: var(--em600); }
+.wm-t i { font-style: normal; color: var(--em400); }
 .hd-search { margin-top: 12px; height: 48px; background: var(--white); display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 16px; }
 .caret { width: 2px; height: 20px; background: var(--em500); margin-left: -8px; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
