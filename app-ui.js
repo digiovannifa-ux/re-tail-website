@@ -117,9 +117,9 @@
   // Store marker as in the app: a green drop with a white rim and a small white shopping bag, no text.
   // The tip sits on (x, y).
   const pinAt = (x, y) => `
-    <g transform="translate(${x - 18} ${y - 44})" filter="url(#pinShadow)">
+    <g transform="translate(${x - 14} ${y - 34.5}) scale(.78)" filter="url(#pinShadow)">
       <ellipse cx="18" cy="44.5" rx="4.5" ry="1.5" fill="rgba(17,17,15,.2)"/>
-      <path d="M18 44.5C17 41.5 3 30 3 17.5a15 15 0 1 1 30 0C33 30 19 41.5 18 44.5Z" fill="#11110F"/>
+      <path d="M18 44.5C17 41.5 3 30 3 17.5a15 15 0 1 1 30 0C33 30 19 41.5 18 44.5Z" fill="#55585A"/>
       <circle cx="18" cy="17.5" r="8.5" fill="#fff"/>
     </g>`;
 
