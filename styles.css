@@ -288,7 +288,7 @@ figure { margin: 0; }
 @keyframes ring { 0% { width: 46vmin; height: 46vmin; opacity: 1; } 100% { width: 130vmin; height: 130vmin; opacity: 0; } }
 .giant {
   position: absolute; z-index: 1;
-  font: 800 clamp(40px, 6.5vw, 120px)/0.88 var(--display);
+  font: 800 clamp(43px, 7vw, 130px)/0.88 var(--display);
   letter-spacing: -0.055em; word-spacing: 0.1em; text-transform: uppercase;
   color: var(--pine);
   will-change: transform;
