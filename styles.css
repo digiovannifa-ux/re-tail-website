@@ -643,6 +643,7 @@ html { scroll-padding-top: var(--bar); }
 .gate-list li { display: flex; gap: 12px; align-items: flex-start; font-weight: 500; color: var(--pine); }
 .gate-list i { flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: var(--mint200); color: var(--em600); }
 .gate-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+.gate-note { margin-top: 14px; font-size: 14px; color: var(--text2); }
 .gate-aside { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 15px; color: var(--text2); }
 .gate-aside a { color: var(--em600); font-weight: 700; text-decoration: none; }
 .gate-aside a:hover { text-decoration: underline; }
