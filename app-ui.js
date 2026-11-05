@@ -118,10 +118,9 @@
   // The tip sits on (x, y).
   const pinAt = (x, y) => `
     <g transform="translate(${x - 18} ${y - 44})" filter="url(#pinShadow)">
-      <ellipse cx="18" cy="44" rx="5" ry="1.8" fill="rgba(17,17,15,.22)"/>
-      <path d="M18 43.5C18 43.5 3.5 28.6 3.5 17.5a14.5 14.5 0 1 1 29 0C32.5 28.6 18 43.5 18 43.5Z" fill="#1C7A4E" stroke="#fff" stroke-width="2.5"/>
-      <path d="M12.2 14.5h11.6l-.9 9.8a1.4 1.4 0 0 1-1.4 1.2h-7a1.4 1.4 0 0 1-1.4-1.2Z" fill="#fff"/>
-      <path d="M15.2 14.5v-1.6a2.8 2.8 0 0 1 5.6 0v1.6" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+      <ellipse cx="18" cy="44.5" rx="4.5" ry="1.5" fill="rgba(17,17,15,.2)"/>
+      <path d="M18 44.5C17 41.5 3 30 3 17.5a15 15 0 1 1 30 0C33 30 19 41.5 18 44.5Z" fill="#11110F"/>
+      <circle cx="18" cy="17.5" r="8.5" fill="#fff"/>
     </g>`;
 
   // ---------- screens ----------
