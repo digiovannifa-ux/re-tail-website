@@ -10,13 +10,31 @@
 <meta property="og:description" content="Cerca un capo e scopri quale negozio vicino a te lo ha nella tua taglia. Prenota la visita e passa a provarlo.">
 <meta property="og:image" content="https://re-tail.it/media/foto/negozio-1.jpg">
 <meta property="og:url" content="https://re-tail.it/">
-<meta name="theme-color" content="#D9EBE1">
+<meta name="theme-color" content="#15613D">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<!-- TOP BAR: dark green banner with the site sections. -->
+<div class="navbar" id="navbar">
+  <nav class="tb" aria-label="Sezioni del sito">
+    <a class="logo" href="#top" aria-label="Re·Tail, home">Re<span class="dot">·</span>Tail</a>
+    <div class="tb-links" id="tbLinks">
+      <a href="#top">Home</a>
+      <a href="#perche">Perché Re·Tail</a>
+      <a href="#app">L'app</a>
+      <a href="#come-funziona">Come funziona</a>
+      <a href="#negozi">Per i negozi</a>
+      <a href="#dove">Dove siamo</a>
+      <a class="tb-cta-m" href="#contatti">Contattaci</a>
+    </div>
+    <a class="tb-cta" href="#contatti">Contattaci</a>
+    <button class="tb-menu" type="button" aria-expanded="false" aria-controls="tbLinks" aria-label="Apri il menu"><i></i><i></i></button>
+  </nav>
+</div>
 
 <nav class="pill" aria-label="Navigazione">
   <a class="lnk" href="#come-funziona">Come funziona</a>
@@ -193,7 +211,7 @@
 </section>
 
 <!-- CITIES -->
-<section class="cities">
+<section class="cities" id="dove">
   <img src="media/foto/via-2.jpg" alt="" loading="lazy">
   <div class="in">
     <span class="eyebrow" style="color:var(--mint200)">07 / Dove</span>
@@ -204,7 +222,7 @@
 </section>
 
 <!-- DOWNLOAD -->
-<section class="download">
+<section class="download" id="contatti">
   <div class="wrap">
     <span class="eyebrow">08 / L'app</span>
     <h2 style="margin-top:18px">Il tuo prossimo capo<br>è dietro <span class="g">l'angolo.</span></h2>

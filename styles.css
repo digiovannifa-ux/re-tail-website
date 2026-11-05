@@ -578,6 +578,46 @@ footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
   .pill .lnk { padding: 12px 10px; font-size: 10px; letter-spacing: .1em; }
 }
 
+/* ---------- TOP BAR (emerald banner with the sections) ---------- */
+:root { --bar: 76px; }
+html { scroll-padding-top: var(--bar); }
+.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; color: var(--white); }
+.tb { height: var(--bar); display: flex; align-items: center; gap: 28px; padding: 0 max(20px, 3vw); background: var(--em600); box-shadow: 0 1px 0 rgba(255, 255, 255, .06), 0 8px 24px rgba(15, 34, 38, .14); }
+.tb .logo { font-size: 26px; color: var(--white); }
+.tb .dot { color: #9FF0C4; }
+.tb-links { display: flex; align-items: center; gap: 4px; margin: 0 auto; }
+.tb-links a { padding: 12px 16px; border-radius: 999px; text-decoration: none; font: 700 16px/1 var(--display); letter-spacing: -0.01em; color: rgba(255, 255, 255, .86); transition: background .2s, color .2s; white-space: nowrap; }
+.tb-links a:hover { color: var(--white); background: rgba(255, 255, 255, .1); }
+.tb-links a.on { color: var(--white); background: var(--pink); box-shadow: 0 6px 16px rgba(215, 91, 160, .35); }
+.tb-links a.on:hover { background: #C94C92; }
+.tb-cta, .tb-cta-m { text-decoration: none; font: 800 14px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 16px 24px; border-radius: 999px; white-space: nowrap; background: var(--mint200); color: var(--em600); transition: transform .3s var(--ease), background .2s; }
+.tb-cta:hover { transform: translateY(-1px); background: var(--white); }
+.tb-cta-m { display: none; }
+.tb-menu { display: none; margin-left: auto; width: 44px; height: 44px; border: 0; border-radius: 12px; background: rgba(255, 255, 255, .1); cursor: pointer; position: relative; }
+.tb-menu i { position: absolute; left: 13px; right: 13px; height: 2px; border-radius: 2px; background: var(--white); transition: transform .3s var(--ease), top .3s var(--ease); }
+.tb-menu i:first-child { top: 17px; }
+.tb-menu i:last-child { top: 25px; }
+.tb-menu[aria-expanded="true"] i:first-child { top: 21px; transform: rotate(45deg); }
+.tb-menu[aria-expanded="true"] i:last-child { top: 21px; transform: rotate(-45deg); }
+
+/* The sticky scenes start under the bar */
+.stick { top: var(--bar); height: calc(100vh - var(--bar)); height: calc(100svh - var(--bar)); }
+
+@media (max-width: 1100px) {
+  .tb-links a { padding: 12px 10px; font-size: 15px; }
+  .tb-cta { padding: 15px 18px; font-size: 13px; }
+}
+@media (max-width: 960px) {
+  :root { --bar: 64px; }
+  .tb .logo { font-size: 23px; }
+  .tb-cta { display: none; }
+  .tb-menu { display: block; }
+  .tb-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 2px; padding: 10px 16px 18px; margin: 0; background: var(--em600); box-shadow: 0 18px 30px rgba(15, 34, 38, .22); }
+  .tb-links.open { display: flex; }
+  .tb-links a { padding: 16px 12px; font-size: 20px; border-radius: 12px; }
+  .tb-links .tb-cta-m { display: block; text-align: center; color: var(--em600); background: var(--mint200); font: 800 15px/1 var(--display); letter-spacing: .06em; margin-top: 10px; padding: 18px; font-size: 15px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .row, .tk, .rings i, .caret { animation: none; }
   .float, .scr, .reveal .w { transition: none; }
