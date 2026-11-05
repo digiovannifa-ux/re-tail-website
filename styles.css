@@ -225,12 +225,12 @@ figure { margin: 0; }
 .st-r b { display: block; font-size: 14px; }
 .st-r small { display: block; font-size: 12px; color: var(--text2); }
 .st-r small.l { color: var(--text3); font-size: 11.5px; }
-.mono { flex: none; border-radius: 50%; background: var(--em500); color: var(--white); display: grid; place-items: center; font-family: var(--display); font-weight: 700; letter-spacing: -.02em; }
+.mono { flex: none; background: var(--white); border: 1px solid var(--line, #ECE9E0); color: #11110F; display: grid; place-items: center; text-align: center; font-family: var(--body, inherit); font-weight: 500; line-height: 1.25; letter-spacing: .14em; text-transform: uppercase; }
 
 .so-ph { height: 180px; display: flex; gap: 2px; }
 .so-ph img { width: 50%; }
 .so { padding: 0 20px; }
-.so-mono { position: relative; width: 68px; height: 68px; margin-top: -34px; border-radius: 50%; border: 4px solid var(--white); background: var(--em500); color: var(--white); display: grid; place-items: center; font: 700 22px/1 var(--display); }
+.so-mono { position: relative; width: 68px; height: 68px; margin-top: -34px; border-radius: 16px; border: 1px solid #ECE9E0; background: var(--white); color: #11110F; display: grid; place-items: center; text-align: center; font: 500 8.5px/1.25 var(--body, inherit); letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 10px rgba(17,17,15,.12); }
 .so-n { margin-top: 10px; font: 800 22px/1.1 var(--display); letter-spacing: -.02em; text-transform: uppercase; }
 .so-k { margin-top: 2px; font-size: 13px; color: var(--text2); }
 .so p { margin: 10px 0 12px; font-size: 13.5px; line-height: 1.45; color: #3c403d; }

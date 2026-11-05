@@ -99,7 +99,8 @@
       <div class="card-b">${p.brand}</div><div class="card-n">${p.item}</div><div class="card-p">${p.price}</div>
       ${p.avail ? `<div class="card-a"><i></i>${p.avail}</div>` : ''}
     </div>`;
-  const mono = (s, size = 44) => `<span class="mono" style="width:${size}px;height:${size}px;font-size:${Math.round(size * 0.33)}px">${s.mono}</span>`;
+  // Store logo: a white rounded square with the (made-up) store name set as a wordmark, as in the app.
+  const mono = (s, size = 44) => `<span class="mono" style="width:${size}px;height:${size}px;border-radius:${Math.round(size * 0.24)}px;font-size:${(size * 0.12).toFixed(1)}px">${s.name.split(' ').join('<br>')}</span>`;
 
   // A stylised street map (no tiles: the site loads nothing from third parties).
   const streetMap = (pins) => `
@@ -203,7 +204,7 @@
     <div class="bd">
       <div class="so-ph"><img src="media/foto/negozio-4.jpg" alt=""><img src="media/foto/negozio-9.jpg" alt=""></div>
       <div class="so">
-        <span class="so-mono">SL</span>
+        <span class="so-mono">Sartoria<br>Levante</span>
         <div class="so-n">Sartoria Levante</div>
         <div class="so-k">Multi-brand · Bari</div>
         <p>Dal 1987 in via Argiro: capispalla, maglieria e piccoli marchi italiani scelti uno per uno.</p>
