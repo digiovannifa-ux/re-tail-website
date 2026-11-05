@@ -104,6 +104,7 @@
   // A stylised street map (no tiles: the site loads nothing from third parties).
   const streetMap = (pins) => `
     <svg class="smap" viewBox="0 0 402 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><filter id="pinShadow" x="-30%" y="-60%" width="160%" height="220%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#11110F" flood-opacity=".18"/></filter></defs>
       <rect width="402" height="240" fill="#EEF0EA"/>
       <path d="M-10 40 L420 -10 M-10 120 L420 70 M-10 200 L420 150 M-10 270 L420 225" stroke="#fff" stroke-width="13"/>
       <path d="M40 -10 L110 260 M170 -10 L240 260 M300 -10 L370 260" stroke="#fff" stroke-width="10"/>
@@ -113,9 +114,20 @@
       <path d="M-10 236 C 120 210, 260 250, 420 214 L420 260 L-10 260Z" fill="#CFE3EE"/>
       ${pins}
     </svg>`;
-  const pinAt = (x, y, label, big) => `
-    <g transform="translate(${x} ${y})"><path d="M0 0c-${big ? 14 : 11} -${big ? 16 : 13} -${big ? 17 : 14} -${big ? 24 : 20} -${big ? 17 : 14} -${big ? 34 : 28}a${big ? 17 : 14} ${big ? 17 : 14} 0 0 1 ${big ? 34 : 28} 0c0 ${big ? 10 : 8}-${big ? 3 : 3} ${big ? 18 : 15}-${big ? 17 : 14} ${big ? 34 : 28}z" fill="${big ? '#1C7A4E' : '#15613D'}" stroke="#fff" stroke-width="2.5"/>
-    <text x="0" y="-${big ? 29 : 24}" text-anchor="middle" font-family="Poppins" font-weight="700" font-size="${big ? 12 : 10}" fill="#fff">${label}</text></g>`;
+  // Store marker as in the app: a white label with the monogram in a green disc and, where there is
+  // room, the store name; a small pointer marks the spot (x, y).
+  const pinAt = (x, y, label, name) => {
+    const w = name ? 36 + name.length * 6.6 : 30;
+    const l = -w / 2;
+    return `
+    <g transform="translate(${x} ${y})" filter="url(#pinShadow)">
+      <path d="M-6 -9 L0 -2 L6 -9 Z" fill="#fff"/>
+      <rect x="${l}" y="-39" width="${w}" height="30" rx="15" fill="#fff" stroke="rgba(17,17,15,.08)"/>
+      <circle cx="${l + 15}" cy="-24" r="12" fill="#1C7A4E"/>
+      <text x="${l + 15}" y="-20.5" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="9.5" fill="#fff">${label}</text>
+      ${name ? `<text x="${l + 32}" y="-20" font-family="Poppins" font-weight="700" font-size="11.5" fill="#11110F">${name}</text>` : ''}
+    </g>`;
+  };
 
   // ---------- screens ----------
   const S = {};
@@ -170,7 +182,7 @@
   S.pickup = () => `
     ${headPush()}
     <div class="bd">
-      <div class="pk-map">${streetMap(pinAt(206, 150, 'SL', true))}</div>
+      <div class="pk-map">${streetMap(pinAt(206, 150, 'SL', 'Sartoria Levante'))}</div>
       <div class="pk">
         <span class="pk-ok">${ic('check', 30, '#1C7A4E', 2)}</span>
         <div class="pk-t">Visita prenotata</div>
@@ -185,7 +197,7 @@
     ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · raggio <b>10 km</b></span><em>Cambia</em></div>`, 'Mappa')}
     <div class="bd">
       <div class="chips"><span class="on">Tutti</span><span>Uomo</span><span>Donna</span><span>Bambino</span></div>
-      <div class="mapbox">${streetMap(pinAt(120, 92, 'SL', true) + pinAt(250, 130, 'BV') + pinAt(318, 70, 'AC') + pinAt(78, 190, 'SM'))}
+      <div class="mapbox">${streetMap(pinAt(140, 96, 'SL', 'Sartoria Levante') + pinAt(262, 150, 'BV') + pinAt(318, 70, 'AC') + pinAt(84, 196, 'SM', 'Studio Marea'))}
         <span class="mapbtn" style="top:12px">${ic('plus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="top:56px">${ic('minus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="bottom:12px">${ic('locate', 18, '#11110F', 1.7)}</span></div>
       <div class="sec-h"><span>Negozi vicino a te</span><small>4 negozi</small></div>
       ${STORES.map((s) => `<div class="st-r">${mono(s)}<div><b>${s.name}</b><small>${s.kind}</small><small class="l">${s.addr} · ${s.dist}</small></div>${ic('chevronRight', 18, '#C2BEB2', 1.8)}</div>`).join('')}
