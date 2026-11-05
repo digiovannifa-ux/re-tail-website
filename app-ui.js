@@ -114,20 +114,15 @@
       <path d="M-10 236 C 120 210, 260 250, 420 214 L420 260 L-10 260Z" fill="#CFE3EE"/>
       ${pins}
     </svg>`;
-  // Store marker as in the app: a white label with the monogram in a green disc and, where there is
-  // room, the store name; a small pointer marks the spot (x, y).
-  const pinAt = (x, y, label, name) => {
-    const w = name ? 36 + name.length * 6.6 : 30;
-    const l = -w / 2;
-    return `
-    <g transform="translate(${x} ${y})" filter="url(#pinShadow)">
-      <path d="M-6 -9 L0 -2 L6 -9 Z" fill="#fff"/>
-      <rect x="${l}" y="-39" width="${w}" height="30" rx="15" fill="#fff" stroke="rgba(17,17,15,.08)"/>
-      <circle cx="${l + 15}" cy="-24" r="12" fill="#1C7A4E"/>
-      <text x="${l + 15}" y="-20.5" text-anchor="middle" font-family="Poppins" font-weight="800" font-size="9.5" fill="#fff">${label}</text>
-      ${name ? `<text x="${l + 32}" y="-20" font-family="Poppins" font-weight="700" font-size="11.5" fill="#11110F">${name}</text>` : ''}
+  // Store marker as in the app: a green drop with a white rim and a small white shopping bag, no text.
+  // The tip sits on (x, y).
+  const pinAt = (x, y) => `
+    <g transform="translate(${x - 18} ${y - 44})" filter="url(#pinShadow)">
+      <ellipse cx="18" cy="44" rx="5" ry="1.8" fill="rgba(17,17,15,.22)"/>
+      <path d="M18 43.5C18 43.5 3.5 28.6 3.5 17.5a14.5 14.5 0 1 1 29 0C32.5 28.6 18 43.5 18 43.5Z" fill="#1C7A4E" stroke="#fff" stroke-width="2.5"/>
+      <path d="M12.2 14.5h11.6l-.9 9.8a1.4 1.4 0 0 1-1.4 1.2h-7a1.4 1.4 0 0 1-1.4-1.2Z" fill="#fff"/>
+      <path d="M15.2 14.5v-1.6a2.8 2.8 0 0 1 5.6 0v1.6" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
     </g>`;
-  };
 
   // ---------- screens ----------
   const S = {};
@@ -182,7 +177,7 @@
   S.pickup = () => `
     ${headPush()}
     <div class="bd">
-      <div class="pk-map">${streetMap(pinAt(206, 150, 'SL', 'Sartoria Levante'))}</div>
+      <div class="pk-map">${streetMap(pinAt(206, 150))}</div>
       <div class="pk">
         <span class="pk-ok">${ic('check', 30, '#1C7A4E', 2)}</span>
         <div class="pk-t">Visita prenotata</div>
@@ -197,7 +192,7 @@
     ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · raggio <b>10 km</b></span><em>Cambia</em></div>`, 'Mappa')}
     <div class="bd">
       <div class="chips"><span class="on">Tutti</span><span>Uomo</span><span>Donna</span><span>Bambino</span></div>
-      <div class="mapbox">${streetMap(pinAt(140, 96, 'SL', 'Sartoria Levante') + pinAt(262, 150, 'BV') + pinAt(318, 70, 'AC') + pinAt(84, 196, 'SM', 'Studio Marea'))}
+      <div class="mapbox">${streetMap(pinAt(140, 96) + pinAt(262, 150) + pinAt(318, 70) + pinAt(84, 196))}
         <span class="mapbtn" style="top:12px">${ic('plus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="top:56px">${ic('minus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="bottom:12px">${ic('locate', 18, '#11110F', 1.7)}</span></div>
       <div class="sec-h"><span>Negozi vicino a te</span><small>4 negozi</small></div>
       ${STORES.map((s) => `<div class="st-r">${mono(s)}<div><b>${s.name}</b><small>${s.kind}</small><small class="l">${s.addr} · ${s.dist}</small></div>${ic('chevronRight', 18, '#C2BEB2', 1.8)}</div>`).join('')}
