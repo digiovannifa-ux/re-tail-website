@@ -18,20 +18,25 @@
 </head>
 <body>
 
-<!-- TOP BAR: dark green banner with the site sections. -->
+<!-- TOP BAR: dark green banner with the site sections, the shop area and the login. -->
 <div class="navbar" id="navbar">
   <nav class="tb" aria-label="Sezioni del sito">
     <a class="logo" href="#top" aria-label="Re·Tail, home">Re<span class="dot">·</span>Tail</a>
     <div class="tb-links" id="tbLinks">
-      <a href="#top">Home</a>
-      <a href="#perche">Perché Re·Tail</a>
-      <a href="#app">L'app</a>
-      <a href="#come-funziona">Come funziona</a>
-      <a href="#negozi">Per i negozi</a>
-      <a href="#dove">Dove siamo</a>
-      <a class="tb-cta-m" href="#contatti">Contattaci</a>
+      <div class="tb-nav">
+        <a href="#top">Home</a>
+        <a href="#perche">Perché Re·Tail</a>
+        <a href="#app">L'app</a>
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#negozi">Per i negozi</a>
+        <a href="#dove">Dove siamo</a>
+        <a href="#contatti">Contattaci</a>
+      </div>
+      <div class="tb-actions">
+        <a class="tb-btn ghost" href="area-negozi.html">Area negozi</a>
+        <a class="tb-btn solid" href="accedi.html">Accedi</a>
+      </div>
     </div>
-    <a class="tb-cta" href="#contatti">Contattaci</a>
     <button class="tb-menu" type="button" aria-expanded="false" aria-controls="tbLinks" aria-label="Apri il menu"><i></i><i></i></button>
   </nav>
 </div>
@@ -247,6 +252,7 @@
 </footer>
 
 <script src="app-ui.js"></script>
+<script src="nav.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -74,28 +74,6 @@
   };
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) type(queries[0]);
 
-  // Top bar: phone menu and the current section highlighted.
-  const menuBtn = document.querySelector('.tb-menu');
-  const tbLinks = document.getElementById('tbLinks');
-  const setMenu = (open) => {
-    tbLinks.classList.toggle('open', open);
-    menuBtn.setAttribute('aria-expanded', open);
-    menuBtn.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
-  };
-  menuBtn.addEventListener('click', () => setMenu(!tbLinks.classList.contains('open')));
-  tbLinks.addEventListener('click', (e) => e.target.closest('a') && setMenu(false));
-  addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
-  const navLinks = [...tbLinks.querySelectorAll('a:not(.tb-cta-m)')];
-  const targets = navLinks.map((a) => document.querySelector(a.getAttribute('href')));
-  const spy = () => {
-    const y = innerHeight * 0.35;
-    let cur = 0;
-    targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= y) cur = i; });
-    navLinks.forEach((a, i) => a.classList.toggle('on', i === cur));
-  };
-  addEventListener('scroll', spy, { passive: true });
-  spy();
-
   // Play background videos only while visible.
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => (e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()));
