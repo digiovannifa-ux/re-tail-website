@@ -288,14 +288,14 @@ figure { margin: 0; }
 @keyframes ring { 0% { width: 46vmin; height: 46vmin; opacity: 1; } 100% { width: 130vmin; height: 130vmin; opacity: 0; } }
 .giant {
   position: absolute; z-index: 1;
-  font: 800 clamp(64px, 15.5vw, 250px)/0.86 var(--display);
-  letter-spacing: -0.055em; text-transform: uppercase;
+  font: 800 clamp(48px, 8vw, 150px)/0.86 var(--display);
+  letter-spacing: -0.055em; word-spacing: 0.1em; text-transform: uppercase;
   color: var(--pine);
   will-change: transform;
   white-space: nowrap;
 }
-.giant.top { top: 7vh; left: 3vw; }
-.giant.bot { bottom: 9vh; right: 3vw; text-align: right; }
+.giant.top { top: 7vh; left: 3vw; z-index: 3; }
+.giant.bot { bottom: 9vh; right: 3vw; text-align: right; z-index: 3; }
 .giant .em { color: var(--em500); }
 .hero-sub { position: absolute; z-index: 4; left: 3vw; bottom: 9vh; max-width: 320px; font-size: 15px; color: var(--text2); }
 .hero-sub strong { color: var(--pine); }
@@ -533,12 +533,12 @@ footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
 
 @media (max-width: 860px) {
   body { font-size: 16px; }
-  .giant.top { top: 11vh; }
+  .giant.top { top: 4vh; }
   .giant.bot { bottom: 15vh; }
   .hero-sub, .hero-step .n, .hero-step .t { display: none; }
   .hero-step { top: auto; bottom: 100px; right: 50%; transform: translateX(50%); }
   .bars { justify-content: center; }
-  .hero-phone { --w: min(240px, 54vw, 34vh); }
+  .hero-phone { --w: min(220px, 50vw, 32vh); }
   .float { font-size: 11px; padding: 8px 10px; max-width: 180px; border-radius: 12px; }
   .f-prod { left: 3vw; top: 30vh; padding: 6px 10px 6px 6px; gap: 8px; }
   .f-prod img { width: 36px; height: 44px; border-radius: 6px; }
