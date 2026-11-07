@@ -191,7 +191,7 @@
   S.map = () => `
     ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · raggio <b>10 km</b></span><em>Cambia</em></div>`, 'Mappa')}
     <div class="bd">
-      <div class="chips"><span class="on">Tutti</span><span>Uomo</span><span>Donna</span><span>Bambino</span></div>
+      <div class="chips"><span>Genere${ic('chevronDown', 14, '#11110F', 2)}</span><span>Categoria${ic('chevronDown', 14, '#11110F', 2)}</span></div>
       <div class="mapbox">${streetMap(pinAt(140, 96) + pinAt(262, 150) + pinAt(318, 70) + pinAt(84, 196))}
         <span class="mapbtn" style="top:12px">${ic('plus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="top:56px">${ic('minus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="bottom:12px">${ic('locate', 18, '#11110F', 1.7)}</span></div>
       <div class="sec-h"><span>Negozi vicino a te</span><small>4 negozi</small></div>

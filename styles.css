@@ -213,7 +213,7 @@ figure { margin: 0; }
 .pk-cta { position: absolute; left: 0; right: 0; bottom: 0; }
 
 .chips { display: flex; gap: 8px; padding: 12px 18px; }
-.chips span { padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; font-size: 13px; font-weight: 600; }
+.chips span { display: inline-flex; align-items: center; gap: 4px; padding: 7px 10px 7px 14px; border: 1px solid var(--border); border-radius: 999px; font-size: 13px; font-weight: 500; }
 .chips .on { background: var(--em500); border-color: var(--em500); color: var(--white); }
 .mapbox { position: relative; height: 250px; }
 .mapbtn { position: absolute; right: 12px; width: 38px; height: 38px; border-radius: 10px; background: var(--white); display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
