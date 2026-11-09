@@ -38,6 +38,7 @@
           <li><b>Dati che scegli di aggiungere al profilo:</b> telefono, data di nascita, genere, paese, città e taglie.</li>
           <li><b>Uso del servizio:</b> capi salvati in wishlist, prenotazioni in negozio (negozio, capi, taglie, giorno e fascia oraria), messaggi scambiati con i negozi, avvisi di nuova disponibilità che attivi (capo, taglia, colore e se avvisarti con una notifica o via email) e preferenze dell'app (sezione, città e raggio di ricerca, reparti per cui fai shopping, notifiche che vuoi ricevere). I capi che guardi e le ricerche che fai restano solo sul tuo dispositivo, dove servono a suggerirti capi simili: non li salviamo sui nostri server.</li>
           <li><b>Posizione:</b> solo se la consenti, l'app usa la posizione del dispositivo mentre è aperta per calcolare la distanza dai negozi. La posizione non viene salvata sui nostri server; per riconoscere il comune in cui ti trovi, il telefono la passa al servizio di geocodifica del suo sistema operativo (Apple su iPhone, Google su Android).</li>
+          <li><b>Notifiche:</b> se consenti le notifiche, salviamo il codice che il servizio di notifiche assegna al tuo telefono (token) e la lingua dell'app, per inviarti le risposte dei negozi e gli avvisi di nuova disponibilità anche quando l'app è chiusa. Il codice viene cancellato quando esci dall'account sul telefono o elimini l'account.</li>
         </ul>
         <p>Puoi sfogliare il catalogo senza account: in quel caso non raccogliamo dati personali.</p>
       </section>
@@ -54,7 +55,8 @@
         <h2>Con chi li condividiamo</h2>
         <ul>
           <li><b>Il negozio</b> presso cui prenoti o a cui scrivi, limitatamente ai dati necessari per la prenotazione o la conversazione (il negozio vede il tuo nome abbreviato, ad esempio “Giulia M.”).</li>
-          <li><b>Fornitori tecnici</b> che ospitano il servizio, vincolati da accordi sul trattamento dei dati: Supabase (database e autenticazione), Resend (invio delle email di servizio), GitHub (hosting di questo sito).</li>
+          <li><b>Fornitori tecnici</b> che ospitano il servizio, vincolati da accordi sul trattamento dei dati: Supabase (database e autenticazione), Resend (invio delle email di servizio), Expo (invio delle notifiche, che passano dai servizi di notifica di Apple e Google con il testo della notifica e il codice del telefono), Cloudflare (hosting della versione web dell'app, app.re-tail.it), GitHub (hosting di questo sito).</li>
+          <li><b>OpenStreetMap:</b> nella versione web la mappa carica le immagini della cartina dai server della OpenStreetMap Foundation, che ricevono il tuo indirizzo IP e la zona della mappa che stai guardando, secondo la loro informativa.</li>
           <li><b>Google e Apple</b>, solo se scegli di accedere con il loro account: ricevono la richiesta di accesso secondo le loro informative.</li>
         </ul>
         <p>Alcuni fornitori possono trattare dati fuori dallo Spazio economico europeo; in quel caso il trasferimento avviene sulla base delle clausole contrattuali standard della Commissione europea o di una decisione di adeguatezza. Non vendiamo i tuoi dati.</p>
@@ -72,6 +74,7 @@
       <section id="sito">
         <h2>Questo sito</h2>
         <p>re-tail.it non usa cookie, non ha strumenti di analisi o pubblicità e non carica risorse da servizi di terzi: font, immagini e video sono ospitati sul sito stesso. Il fornitore di hosting (GitHub Pages) registra per motivi di sicurezza dati tecnici come l'indirizzo IP di chi visita le pagine.</p>
+        <p>La versione web dell'app, <a href="https://app.re-tail.it">app.re-tail.it</a>, è ospitata da Cloudflare, che per motivi di sicurezza registra anch'essa dati tecnici come l'indirizzo IP. Non usa cookie, strumenti di analisi o pubblicità: nella memoria del browser salva solo la sessione di accesso e le tue preferenze (lingua, posizione scelta, reparti). La mappa usa le cartine di OpenStreetMap (vedi sopra).</p>
       </section>
       <section id="modifiche">
         <h2>Modifiche</h2>
