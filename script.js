@@ -131,12 +131,15 @@
     const layout = () => {
       dpr = Math.min(2, devicePixelRatio || 1);
       W = pat.clientWidth; H = pat.clientHeight;
+      if (!W || !H) return false;
       pat.width = W * dpr; pat.height = H * dpr;
       cols = W < 700 ? 4 : 6;
       cellW = W / cols; sw = cellW * 0.74; sh = (sw * img.height) / img.width; cellH = sh + cellW * 0.16;
       sprite = halftone(Math.round(sw * dpr)); soft = blurred(sprite);
+      return true;
     };
     const draw = (t) => {
+      if (!sprite && !layout()) return;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       const shift = (still ? 0 : t * 0.018) + progress(manifesto) * cellH * 1.5;
@@ -155,11 +158,17 @@
         cancelAnimationFrame(raf);
         if (visible) raf = requestAnimationFrame(draw);
       }).observe(manifesto);
-      addEventListener('resize', () => { layout(); draw(performance.now()); });
+      addEventListener('resize', () => { if (layout()) draw(performance.now()); });
       if (still) addEventListener('scroll', () => visible && draw(0), { passive: true });
     };
     img.src = BASE + 'media/app/borsa.jpg';
   }
+
+  // Before/after comparison: reveal the steps when it comes into view.
+  const vs = document.querySelector('.vs');
+  if (vs) new IntersectionObserver(([e], o) => {
+    if (e.isIntersecting) { vs.classList.add('in'); o.disconnect(); }
+  }, { threshold: 0.3 }).observe(vs);
 
   // Play background videos only while visible.
   const io = new IntersectionObserver((entries) => {
