@@ -20,8 +20,8 @@
   const stepT = document.getElementById('stepT');
   const EN = document.documentElement.lang === 'en';
   const STEPS = EN
-    ? ['Find the item', 'Pick your size', 'Book your visit', 'Try it in store']
-    : ['Cerca il capo', 'Scegli la taglia', 'Prenota la visita', 'Provalo in negozio'];
+    ? ['Find the item', 'Take a closer look', 'Choose the store', 'Book your visit']
+    : ['Cerca il capo', 'Guardalo da vicino', 'Scegli il negozio', 'Prenota la visita'];
 
   // Manifesto: split into words; *word* marks the green ones.
   const reveal = document.getElementById('reveal');
@@ -69,17 +69,6 @@
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   frame();
-
-  // Typing effect in the search bar of the first screen.
-  const typed = document.getElementById('typed');
-  const queries = EN ? ['coat', 'wool coat', 'jacket'] : ['cappotto', 'cappotto in lana', 'giacca'];
-  let q = 0;
-  const type = (text, i = 0) => {
-    typed.textContent = text.slice(0, i);
-    if (i < text.length) return setTimeout(() => type(text, i + 1), 90);
-    setTimeout(() => type(queries[(q = (q + 1) % queries.length)]), 2400);
-  };
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) type(queries[0]);
 
   // Live countdown on the visit card.
   const clock = document.getElementById('clock');

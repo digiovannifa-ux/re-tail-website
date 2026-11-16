@@ -1,62 +1,28 @@
-// Phone mockups of the Re·Tail app, drawn at the app's real size (402 × 874 points, iPhone 18 Pro)
-// with its colours, fonts, icons and copy (src/theme/retail.ts, src/components/retail/*).
-// Stores, brands and products are made up for the website; photos are from Unsplash.
+// Phone mockups of the Re·Tail app: real screenshots of the app (the web version at app.re-tail.it,
+// with its example catalogue of made-up stores and brands), shown inside an iPhone frame at the app's
+// real size (402 × 874 points) under an iOS status bar. Screens live in media/screens/.
 (() => {
-  // English on the /en/ pages (<html lang="en">), Italian elsewhere. Copy follows the app's own translations
-  // (src/lib/i18n-en.ts). Assets resolve from this script's folder, so /en/ pages find them too.
+  // English on the /en/ pages (<html lang="en">), Italian elsewhere. Assets resolve from this script's
+  // folder, so /en/ pages find them too.
   const EN = document.documentElement.lang === 'en';
-  const t = (it, en) => (EN ? en : it);
   const BASE = new URL('.', document.currentScript.src).href;
 
-  // ---------- icons (same paths as src/components/retail/icon.tsx) ----------
-  const P = {
-    back: '<path d="m15 18-6-6 6-6"/>',
-    chevronRight: '<path d="m9 18 6-6-6-6"/>',
-    chevronDown: '<path d="m6 9 6 6 6-6"/>',
-    pin: '<path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
-    chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/>',
-    search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
-    tag: '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5"/>',
-    map: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15M9 3.236v15"/>',
-    heart: '<path d="M2 9.5a5.5 5.5 0 0 1 9.6-3.7.56.56 0 0 0 .8 0A5.5 5.5 0 0 1 22 9.5c0 2.3-1.5 4-3 5.5l-5.5 5.3a2 2 0 0 1-3 0L5 15c-1.5-1.5-3-3.2-3-5.5"/>',
-    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
-    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-    close: '<path d="M18 6 6 18M6 6l12 12"/>',
-    send: '<path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/>',
-    navigate: '<polygon points="3 11 22 2 13 21 11 13 3 11"/>',
-    check: '<path d="M20 6 9 17l-5-5"/>',
-    info: '<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/>',
-    plus: '<path d="M12 5v14M5 12h14"/>',
-    minus: '<path d="M5 12h14"/>',
-    locate: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/>',
-    instagram: '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>',
-    qr: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M21 14v.01M14 21h3M21 17v4"/>',
-    calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
-    box: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
-    grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
-    users: '<circle cx="9" cy="8" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v1M16 4a4 4 0 0 1 0 8M22 21v-1a6 6 0 0 0-4-5.6"/>',
+  // name → [file, colour behind the status bar, colour under the app's tab bar]
+  const MINT = '#D9EBE1';
+  const SHOTS = {
+    search: ['search', MINT, MINT],
+    product: ['product', MINT, MINT],
+    sheet: ['sheet', '#6B736D', '#FFFFFF', true],
+    pickup: ['pickup', MINT, MINT],
+    map: ['map', MINT, MINT],
+    store: ['store', MINT, MINT],
+    home: ['home', MINT, MINT],
+    partner: ['partner', MINT, MINT, false, true],
   };
-  const ic = (name, size = 20, color = '#11110F', sw = 1.7, fill = 'none') =>
-    `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="${fill}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name]}</svg>`;
-
-  // ---------- data (invented for the website) ----------
-  const IMG = (n) => `${BASE}media/app/${n}.jpg`;
-  const PROD = {
-    coat: { img: 'cappotto-beige', brand: 'Corallo', item: t('Cappotto in lana doppiopetto', 'Double-breasted wool coat'), price: '€290', avail: t('3 negozi · 650 m', '3 stores · 650 m') },
-    red: { img: 'cappotto-rosso', brand: 'Corallo', item: t('Cappotto con cintura', 'Belted coat'), price: '€320', avail: t('2 negozi · 1,1 km', '2 stores · 1.1 km') },
-    leather: { img: 'giacca', brand: 'Atelier 9', item: t('Giacca in pelle', 'Leather jacket'), price: '€390', avail: t('1 negozio · 1,4 km', '1 store · 1.4 km') },
-    knit: { img: 'maglione', brand: 'Vento', item: t('Maglione a coste in lana', 'Ribbed wool jumper'), price: '€120', avail: t('4 negozi · 650 m', '4 stores · 650 m') },
-    bag: { img: 'borsa', brand: 'Ottobre', item: t('Borsa a mano in pelle', 'Leather handbag'), price: '€240' },
-    sneaker: { img: 'sneakers', brand: 'Nodo', item: t('Sneakers in pelle e suede', 'Leather and suede sneakers'), price: '€165' },
-    jeans: { img: 'jeans', brand: 'Marea', item: t('Jeans slim in cimosa', 'Slim selvedge jeans'), price: '€140' },
-    shirt: { img: 'camicia', brand: 'Atelier 9', item: t('Camicia in popeline', 'Poplin shirt'), price: '€95' },
+  const src = (name) => {
+    const [file, , , , shared] = SHOTS[name];
+    return `${BASE}media/screens/${shared ? file : `${EN ? 'en' : 'it'}-${file}`}.jpg`;
   };
-  const STORES = [
-    { mono: 'SL', name: 'Sartoria Levante', kind: t('Multi-brand · Donna/Uomo', 'Multi-brand · Women/Men'), addr: 'Via Argiro 48', dist: '650 m' },
-    { mono: 'BV', name: 'Bottega Ventuno', kind: t('Designer · Donna', 'Designer · Women'), addr: 'Corso Cavour 112', dist: t('1,1 km', '1.1 km') },
-    { mono: 'AC', name: 'Atelier Corallo', kind: t('Boutique · Donna', 'Boutique · Women'), addr: 'Via Sparano 31', dist: t('1,4 km', '1.4 km') },
-    { mono: 'SM', name: 'Studio Marea', kind: 'Concept store', addr: 'Via Putignani 70', dist: t('2,0 km', '2.0 km') },
-  ];
 
   // ---------- QR code look-alike (deterministic, with the three finder squares) ----------
   const qr = (seed, size) => {
@@ -79,186 +45,27 @@
     return `<svg viewBox="0 0 ${n} ${n}" width="${size}" height="${size}" shape-rendering="crispEdges" aria-hidden="true"><path d="${r}" fill="#11110F"/></svg>`;
   };
 
-  // ---------- shared chrome ----------
-  const statusBar = (light) => `
-    <div class="sb${light ? ' light' : ''}"><span>9:41</span><span class="sb-r">
+  // ---------- iOS status bar ----------
+  const statusBar = `
+    <div class="sb"><span>9:41</span><span class="sb-r">
       <svg width="19" height="12" viewBox="0 0 19 12"><rect x="0" y="8" width="3.2" height="4" rx="1"/><rect x="5" y="5.5" width="3.2" height="6.5" rx="1"/><rect x="10" y="3" width="3.2" height="9" rx="1"/><rect x="15" y="0" width="3.2" height="12" rx="1"/></svg>
       <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2.3c2.3 0 4.4.9 6 2.4l1.2-1.2A10.1 10.1 0 0 0 8.5.6C5.7.6 3.2 1.7 1.3 3.5l1.2 1.2c1.6-1.5 3.7-2.4 6-2.4zm0 3.4c1.4 0 2.6.5 3.6 1.4l1.2-1.2a6.8 6.8 0 0 0-9.6 0l1.2 1.2c1-.9 2.2-1.4 3.6-1.4zm0 3.4c.5 0 1 .2 1.3.5L8.5 11 7.2 9.6c.3-.3.8-.5 1.3-.5z"/></svg>
       <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.8" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2.5"/><path d="M25 4.5v4c.8-.3 1.4-1.1 1.4-2s-.6-1.7-1.4-2z" opacity=".45"/></svg>
     </span></div>`;
-  const wordmark = `<span class="wm">RE<i>·</i>TAIL</span>`;
-  // Home shows the wordmark; the other tabs show the section name in its place, as in the app.
-  const headTab = (extra = '', title = '') => `
-    <div class="hd"><div class="hd-row">${title ? `<span class="wm-t">${title}<i>.</i></span>` : wordmark}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
-  const headPush = (extra = '') => `
-    <div class="hd push"><div class="hd-row">${ic('back', 26, '#11110F', 1.8)}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
-  const TABS = [['home', 'Home'], ['search', t('Cerca', 'Search')], ['tag', t('Brand', 'Brands')], ['map', t('Mappa', 'Map')], ['heart', 'Wishlist'], ['user', t('Io', 'Me')]];
-  const nav = (active) => `
-    <div class="nav">${TABS.map(([k, l]) => {
-      const on = k === active;
-      const icon = k === 'home' ? `<b class="nav-re">RE<i>·</i></b>` : ic(k, 24, on ? '#D75BA0' : '#B8B4A8', 1.6);
-      return `<span class="nav-i${on ? ' on' : ''}">${icon}<em>${l}</em></span>`;
-    }).join('')}</div>`;
-  const card = (p) => `
-    <div class="card">
-      <div class="card-img"><img src="${IMG(p.img)}" alt=""><span class="card-heart">${ic('heart', 21, '#11110F', 1.5)}</span></div>
-      <div class="card-b">${p.brand}</div><div class="card-n">${p.item}</div><div class="card-p">${p.price}</div>
-      ${p.avail ? `<div class="card-a"><i></i>${p.avail}</div>` : ''}
-    </div>`;
-  // Store logo: a white rounded square with the (made-up) store name set as a wordmark, as in the app.
-  const mono = (s, size = 44) => `<span class="mono" style="width:${size}px;height:${size}px;border-radius:${Math.round(size * 0.24)}px;font-size:${(size * 0.12).toFixed(1)}px">${s.name.split(' ').join('<br>')}</span>`;
 
-  // A stylised street map (no tiles: the site loads nothing from third parties).
-  const streetMap = (pins) => `
-    <svg class="smap" viewBox="0 0 402 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs><filter id="pinShadow" x="-30%" y="-60%" width="160%" height="220%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#11110F" flood-opacity=".18"/></filter></defs>
-      <rect width="402" height="240" fill="#EEF0EA"/>
-      <path d="M-10 40 L420 -10 M-10 120 L420 70 M-10 200 L420 150 M-10 270 L420 225" stroke="#fff" stroke-width="13"/>
-      <path d="M40 -10 L110 260 M170 -10 L240 260 M300 -10 L370 260" stroke="#fff" stroke-width="10"/>
-      <path d="M-10 80 L420 30 M-10 160 L420 112 M95 -10 L165 260 M235 -10 L305 260" stroke="#fff" stroke-width="5"/>
-      <rect x="250" y="160" width="70" height="44" rx="4" fill="#DDEBD9" transform="rotate(-7 285 182)"/>
-      <rect x="20" y="10" width="60" height="30" rx="4" fill="#DDEBD9" transform="rotate(-7 50 25)"/>
-      <path d="M-10 236 C 120 210, 260 250, 420 214 L420 260 L-10 260Z" fill="#CFE3EE"/>
-      ${pins}
-    </svg>`;
-  // Store marker as in the app: a green drop with a white rim and a small white shopping bag, no text.
-  // The tip sits on (x, y).
-  const pinAt = (x, y) => `
-    <g transform="translate(${x - 14} ${y - 34.5}) scale(.78)" filter="url(#pinShadow)">
-      <ellipse cx="18" cy="44.5" rx="4.5" ry="1.5" fill="rgba(17,17,15,.2)"/>
-      <path d="M18 44.5C17 41.5 3 30 3 17.5a15 15 0 1 1 30 0C33 30 19 41.5 18 44.5Z" fill="#55585A"/>
-      <circle cx="18" cy="17.5" r="8.5" fill="#fff"/>
-    </g>`;
-
-  // ---------- screens ----------
-  const S = {};
-
-  S.search = () => `
-    ${headTab(`<div class="hd-search">${ic('search', 20, '#9A968B', 1.7)}<span id="typed">${t('cappotto', 'coat')}</span><span class="caret"></span></div>`, t('Cerca', 'Search'))}
-    <div class="bd">
-      <div class="crumb">${t('Donna · Risultati', 'Women · Results')}</div>
-      <div class="ttl">${t('Cappotti e giacche', 'Coats and jackets')}</div>
-      <div class="meta">${t('18 capi · 10 km da te', '18 items · 10 km from you')}</div>
-      <div class="grid">${[PROD.coat, PROD.red, PROD.leather, PROD.knit].map(card).join('')}</div>
-    </div>
-    ${nav('search')}`;
-
-  const productBody = () => `
-    ${headPush()}
-    <div class="bd">
-      <div class="pd-img"><img src="${IMG('cappotto-beige')}" alt=""><span class="pd-heart">${ic('heart', 20, '#11110F', 1.6)}</span><span class="pd-dots"><i class="on"></i><i></i><i></i></span></div>
-      <div class="pd">
-        <div class="pd-b">Corallo</div>
-        <div class="pd-n">Cappotto in lana doppiopetto</div>
-        <div class="pd-row"><b>€290</b><span>${t('Disponibile', 'Available')}</span></div>
-        <div class="lbl">${t('Taglia', 'Size')}</div>
-        <div class="sizes"><span>38</span><span>40</span><span class="on">42</span><span>44</span><span class="out">46</span></div>
-        <div class="avail">
-          <div class="avail-h"><i></i>${t('Disponibile in 3 negozi', 'Available in 3 stores')}</div>
-          <div class="avail-s">${t('entro 10 km da te · tocca per prenotare il ritiro', 'within 10 km of you · tap to book a visit')}</div>
-          ${STORES.slice(0, 2).map((s, i) => `<div class="avail-r">${ic('pin', 16, '#11110F', 1.6)}<div><b>${s.name}</b><small>${s.addr} · ${s.dist}</small></div><em>${i ? 1 : 2} ${t('pz', 'pcs')}</em></div>`).join('')}
-        </div>
-      </div>
-    </div>
-    <div class="pd-cta"><span class="btn-pine">${ic('pin', 16, '#fff', 1.8)}${t('Prenota taglia 42 in negozio', 'Book size 42 in store')}</span></div>
-    ${nav('search')}`;
-  S.product = productBody;
-
-  S.schedule = () => `
-    ${productBody()}
-    <div class="dim"></div>
-    <div class="sheet">
-      <div class="sheet-h"><span>${t('Prenota la visita', 'Book your visit')}</span><i>${ic('close', 16, '#11110F', 2)}</i></div>
-      <div class="sheet-s">${t('Sartoria Levante · 1 capo — scegli quando passare a provarli.', 'Sartoria Levante · 1 item — choose when to come and try it on.')}</div>
-      <div class="note">${ic('info', 17, '#C0398A', 1.8)}<span>${t("Prenoti la <b>visita</b>, non il capo: l'articolo resta in vendita fino al tuo arrivo e potrebbe non essere più disponibile.", 'You book the <b>visit</b>, not the item: it stays on sale until you arrive and may no longer be available.')}</span></div>
-      <div class="lbl">${t('Oggi · mercoledì 4', 'Today · Wednesday 4')}</div>
-      <div class="slot">17:00 – 18:00</div>
-      <div class="slot on">18:00 – 19:00 ${ic('check', 18, '#fff', 2.2)}</div>
-      <div class="slot">19:00 – 20:00</div>
-      <div class="lbl">${t('Domani · giovedì 5', 'Tomorrow · Thursday 5')}</div>
-      <div class="slot">10:00 – 11:00</div>
-      <div class="slot">11:00 – 12:00</div>
-    </div>`;
-
-  S.pickup = () => `
-    ${headPush()}
-    <div class="bd">
-      <div class="pk-map">${streetMap(pinAt(206, 150))}</div>
-      <div class="pk">
-        <span class="pk-ok">${ic('check', 30, '#1C7A4E', 2)}</span>
-        <div class="pk-t">${t('Visita prenotata', 'Visit booked')}</div>
-        <p>${t('Da <b>Sartoria Levante</b> · <b>Oggi, 18:00–19:00</b>. Mostra il codice in negozio quando arrivi.', 'At <b>Sartoria Levante</b> · <b>Today, 18:00–19:00</b>. Show the code in the store when you arrive.')}</p>
-        <div class="pk-qr">${qr('RT-2048', 132)}<span>RT-2048</span></div>
-      </div>
-      <div class="pk-cta"><span class="btn-pine">${ic('navigate', 17, '#fff', 1.8)}${t('Indicazioni · 9 min a piedi', 'Directions · 9 min walk')}</span></div>
-    </div>
-    ${nav('home')}`;
-
-  S.map = () => `
-    ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · ${t('raggio', 'radius')} <b>10 km</b></span><em>${t('Cambia', 'Change')}</em></div>`, t('Mappa', 'Map'))}
-    <div class="bd">
-      <div class="chips"><span>${t('Genere', 'Gender')}${ic('chevronDown', 14, '#11110F', 2)}</span><span>${t('Categoria', 'Category')}${ic('chevronDown', 14, '#11110F', 2)}</span></div>
-      <div class="mapbox">${streetMap(pinAt(140, 96) + pinAt(262, 150) + pinAt(318, 70) + pinAt(84, 196))}
-        <span class="mapbtn" style="top:12px">${ic('plus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="top:56px">${ic('minus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="bottom:12px">${ic('locate', 18, '#11110F', 1.7)}</span></div>
-      <div class="sec-h"><span>${t('Negozi vicino a te', 'Stores near you')}</span><small>${t('4 negozi', '4 stores')}</small></div>
-      ${STORES.map((s) => `<div class="st-r">${mono(s)}<div><b>${s.name}</b><small>${s.kind}</small><small class="l">${s.addr} · ${s.dist}</small></div>${ic('chevronRight', 18, '#C2BEB2', 1.8)}</div>`).join('')}
-    </div>
-    ${nav('map')}`;
-
-  S.store = () => `
-    ${headPush()}
-    <div class="bd">
-      <div class="so-ph"><img src="${BASE}media/foto/negozio-4.jpg" alt=""><img src="${BASE}media/foto/negozio-9.jpg" alt=""></div>
-      <div class="so">
-        <span class="so-mono">Sartoria<br>Levante</span>
-        <div class="so-n">Sartoria Levante</div>
-        <div class="so-k">Multi-brand · Bari</div>
-        <p>${t('Dal 1987 in via Argiro: capispalla, maglieria e piccoli marchi italiani scelti uno per uno.', 'On Via Argiro since 1987: outerwear, knitwear and small Italian labels, chosen one by one.')}</p>
-        <div class="so-r">${ic('pin', 18, '#11110F', 1.6)}<span>Via Argiro 48</span><small>650 m</small></div>
-        <div class="so-r">${ic('clock', 18, '#11110F', 1.6)}<span>${t('Aperto', 'Open')} · 09:30–20:00</span><em>${t('Ora aperto', 'Open now')}</em></div>
-        <div class="lbl">${t('In negozio ora', 'In store now')}</div>
-        <div class="so-strip">${[PROD.coat, PROD.bag, PROD.sneaker, PROD.jeans].map((p) => `<div><img src="${IMG(p.img)}" alt=""><b>${p.brand}</b><small>${p.price}</small></div>`).join('')}</div>
-      </div>
-    </div>
-    ${nav('map')}`;
-
-  S.chat = () => `
-    ${headPush(`<div class="ch-h">${mono(STORES[0], 38)}<div><b>Sartoria Levante</b><small><i></i>${t('Risponde di solito in 10 min', 'Usually replies in 10 min')}</small></div></div>`)}
-    <div class="bd ch">
-      <div class="ch-day">${t('Oggi', 'Today')}</div>
-      <div class="bub them">${t('Ciao Giulia! Sono Marta di Sartoria Levante. Come possiamo aiutarti?', 'Hi Giulia! I\'m Marta from Sartoria Levante. How can we help?')}<small>17:02</small></div>
-      <div class="bub me">${t('Ciao! Il cappotto Corallo lo avete anche in blu, taglia 42?', 'Hi! Do you have the Corallo coat in blue too, size 42?')}<small>17:04</small></div>
-      <div class="bub them">${t('Sì, ne abbiamo uno. Te lo mettiamo in camerino con il beige, così li provi entrambi.', 'Yes, we have one. We\'ll put it in the fitting room with the beige one, so you can try both.')}<small>17:06</small></div>
-      <div class="bub me">${t('Perfetto, passo alle 18 👍', 'Perfect, I\'ll come by at 6 👍')}<small>17:06</small></div>
-      <div class="ch-in"><span>${t('Scrivi un messaggio', 'Write a message')}</span><i>${ic('send', 19, '#fff', 1.8)}</i></div>
-    </div>
-    ${nav('home')}`;
-
-  // The store side (base of the Retailer Dashboard): today's visits.
-  S.partner = () => `
-    <div class="hd"><div class="hd-row">${wordmark}<span class="pt-badge">${t('Negozio', 'Store')}</span></div></div>
-    <div class="bd">
-      <div class="crumb">${t('Sartoria Levante · mercoledì 4', 'Sartoria Levante · Wednesday 4')}</div>
-      <div class="ttl">${t('Visite di oggi', 'Today\'s visits')}</div>
-      <div class="pt-stats"><div><b>6</b><small>${t('Visite', 'Visits')}</small></div><div><b>2</b><small>${t('In arrivo', 'Arriving')}</small></div><div class="hot"><b>1</b><small>Chat</small></div></div>
-      ${[
-        ['17:00', 'Luca R.', 'Nodo · Sneakers · 42', t('Ritirato', 'Collected'), 'done'],
-        ['18:00', 'Giulia M.', t('Corallo · Cappotto · 42', 'Corallo · Coat · 42'), t('In arrivo', 'Arriving'), 'next'],
-        ['18:00', 'Sara P.', t('Vento · Maglione · M', 'Vento · Jumper · M'), t('Confermata', 'Confirmed'), ''],
-        ['19:00', 'Marco D.', 'Marea · Jeans · 32', t('Confermata', 'Confirmed'), ''],
-      ].map(([t, n, it, st, c]) => `<div class="pt-r"><span class="pt-t">${t}</span><div><b>${n}</b><small>${it}</small></div><em class="${c}">${st}</em></div>`).join('')}
-      <div class="pt-cta"><span class="btn-pine">${ic('qr', 17, '#fff', 1.8)}${t('Scansiona il codice', 'Scan the code')}</span></div>
-    </div>
-    <div class="nav partner">${[['grid', t('Oggi', 'Today')], ['calendar', t('Agenda', 'Calendar')], ['box', 'Stock'], ['chat', 'Chat'], ['users', t('Clienti', 'Customers')]]
-      .map(([k, l], i) => `<span class="nav-i${i ? '' : ' on'}">${ic(k, 23, i ? '#B8B4A8' : '#1C7A4E', 1.6)}<em>${l}</em></span>`).join('')}</div>`;
+  // Each screen: the colour behind the status bar on top, the screenshot (402 × 786), then the
+  // home-indicator strip in the colour of the app's tab bar.
+  const screen = (name, i, eager) => {
+    const [, top, bottom, dark] = SHOTS[name];
+    return `<div class="scr${i ? '' : ' on'}${dark ? ' dark' : ''}" data-name="${name}" style="--top:${top};--bottom:${bottom}">
+      <img class="shot" src="${src(name)}" alt="" width="402" height="786" decoding="async"${eager ? '' : ' loading="lazy"'}>${statusBar}</div>`;
+  };
 
   // ---------- mount ----------
-  const frame = (inner) => `<div class="glass"><div class="ui">${inner}<div class="island"></div></div></div>`;
   document.querySelectorAll('.device[data-screens]').forEach((dev) => {
     const names = dev.dataset.screens.split(' ');
-    const light = dev.hasAttribute('data-light');
-    const scr = names.map((n, i) => `<div class="scr${i ? '' : ' on'}" data-name="${n}">${S[n]()}</div>`).join('');
-    dev.innerHTML = frame(scr + statusBar(light));
+    const eager = dev.id === 'phone';
+    dev.innerHTML = `<div class="glass"><div class="ui">${names.map((n, i) => screen(n, i, eager)).join('')}<div class="island"></div></div></div>`;
   });
   document.querySelectorAll('[data-qr]').forEach((el) => (el.innerHTML = qr(el.dataset.qr, +el.dataset.size || 60)));
 
