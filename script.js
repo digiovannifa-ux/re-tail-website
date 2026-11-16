@@ -1,6 +1,7 @@
 // Scroll-driven hero (phone screens + floating cards) and the word-by-word manifesto.
 // Runs after app-ui.js, which draws the phone screens.
 (() => {
+  const BASE = new URL('.', document.currentScript.src).href;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   // 0 when the section's top reaches the top of the viewport, 1 when its sticky part ends.
   const progress = (el) => {
@@ -89,6 +90,75 @@
       left = left > 0 ? left - 1 : 42 * 60 + 17;
       clock.textContent = `00:${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
     }, 1000);
+  }
+
+  // Manifesto background: columns of halftone bags on emerald, sliding in opposite directions,
+  // the outer columns blurred (idea from patternbreak.ing). Drawn on a canvas, only while visible.
+  const pat = document.getElementById('pattern');
+  if (pat) {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = pat.getContext('2d');
+    const img = new Image();
+    let sprite, soft, W, H, dpr, cols, cellW, cellH, sw, sh, raf = 0, visible = false;
+    // Turn the photo into dots: darker pixel = bigger dot; the white background is left empty.
+    const halftone = (w) => {
+      const h = Math.round((w * img.height) / img.width);
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      const g = c.getContext('2d', { willReadFrequently: true });
+      g.drawImage(img, 0, 0, w, h);
+      const d = g.getImageData(0, 0, w, h).data;
+      g.clearRect(0, 0, w, h);
+      const step = Math.max(3, Math.round(w / 70));
+      for (let y = 0; y < h; y += step)
+        for (let x = 0; x < w; x += step) {
+          const i = ((Math.min(h - 1, y + (step >> 1)) * w) + Math.min(w - 1, x + (step >> 1))) * 4;
+          const l = (0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2]) / 255;
+          if (l > 0.88) continue;
+          const k = Math.min(1, Math.max(0, (0.95 - l) / 0.8));
+          g.fillStyle = l < 0.5 ? '#11110F' : '#FFFFFF';
+          g.beginPath(); g.arc(x + step / 2, y + step / 2, Math.max(0.6, k * step * 0.62), 0, 7); g.fill();
+        }
+      return c;
+    };
+    // Cheap blur that works everywhere: shrink, then stretch back.
+    const blurred = (src) => {
+      const t = document.createElement('canvas'); t.width = Math.max(1, src.width / 7 | 0); t.height = Math.max(1, src.height / 7 | 0);
+      t.getContext('2d').drawImage(src, 0, 0, t.width, t.height);
+      const c = document.createElement('canvas'); c.width = src.width; c.height = src.height;
+      const g = c.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(t, 0, 0, c.width, c.height);
+      return c;
+    };
+    const layout = () => {
+      dpr = Math.min(2, devicePixelRatio || 1);
+      W = pat.clientWidth; H = pat.clientHeight;
+      pat.width = W * dpr; pat.height = H * dpr;
+      cols = W < 700 ? 4 : 6;
+      cellW = W / cols; sw = cellW * 0.74; sh = (sw * img.height) / img.width; cellH = sh + cellW * 0.16;
+      sprite = halftone(Math.round(sw * dpr)); soft = blurred(sprite);
+    };
+    const draw = (t) => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      const shift = (still ? 0 : t * 0.018) + progress(manifesto) * cellH * 1.5;
+      for (let c = 0; c < cols; c++) {
+        const edge = c === 0 || c === cols - 1;
+        const off = ((c % 2 ? shift : -shift) % cellH + cellH) % cellH;
+        ctx.globalAlpha = edge ? 0.7 : 1;
+        for (let y = off - cellH; y < H; y += cellH) ctx.drawImage(edge ? soft : sprite, c * cellW + (cellW - sw) / 2, y, sw, sh);
+      }
+      if (!still && visible) raf = requestAnimationFrame(draw);
+    };
+    img.onload = () => {
+      layout();
+      new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting;
+        cancelAnimationFrame(raf);
+        if (visible) raf = requestAnimationFrame(draw);
+      }).observe(manifesto);
+      addEventListener('resize', () => { layout(); draw(performance.now()); });
+      if (still) addEventListener('scroll', () => visible && draw(0), { passive: true });
+    };
+    img.src = BASE + 'media/app/borsa.jpg';
   }
 
   // Play background videos only while visible.

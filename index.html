@@ -82,7 +82,7 @@
     <!-- Floating "stickers" around the phone: each one appears at a step of the scroll (data-at). -->
     <div class="float f-filter" data-at="0" data-to="0.72" data-par="-0.04"><div class="card">
       <span class="tag">La tua ricerca</span>
-      <ul><li>Cappotto in lana<i></i></li><li>Taglia 42<i></i></li><li>Entro 2 km<i></i></li><li>Aperto adesso<i></i></li></ul>
+      <ul><li>Cappotto in lana<i></i></li><li>Taglia 42<i></i></li><li>Aperto, a 2 km<i></i></li></ul>
       <span class="go">Trovato in 3 negozi →</span>
     </div></div>
     <div class="float f-prod" data-at="0.1" data-par="-0.03"><div class="card">
@@ -110,12 +110,12 @@
   </div>
 </div>
 
-<!-- MANIFESTO: one sentence revealed word by word over a shop video -->
+<!-- MANIFESTO: one short sentence revealed word by word over a scrolling grid of halftone bags (drawn by script.js) -->
 <section class="manifesto" id="perche">
   <div class="stick">
-    <video class="bgvid" src="media/boutique.mp4" poster="media/boutique.jpg" autoplay muted loop playsinline preload="metadata"></video>
+    <canvas class="pattern" id="pattern" aria-hidden="true"></canvas>
     <span class="eyebrow">01 / Perché Re·Tail</span>
-    <p class="reveal" id="reveal">Il negozio sotto casa ha *già* quello che cerchi. *Solo* *che* *non* *lo* *sai.* Online vedi tutto ma non puoi toccare niente. In negozio tocchi tutto ma non sai cosa c'è. *Re·Tail* *unisce* *le* *due* *cose.*</p>
+    <p class="reveal" id="reveal">Il capo che cerchi è *già* *dietro* *l'angolo.* Nella tua taglia. *Adesso* *lo* *sai.*</p>
   </div>
 </section>
 
