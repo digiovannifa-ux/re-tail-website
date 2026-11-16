@@ -14,6 +14,7 @@
   const floats = [...document.querySelectorAll('.float')];
   const parallax = [...document.querySelectorAll('[data-par]')];
   const bars = [...document.querySelectorAll('.bars i')];
+  const pill = document.querySelector('.pill');
   const stepN = document.getElementById('stepN');
   const stepT = document.getElementById('stepT');
   const EN = document.documentElement.lang === 'en';
@@ -42,7 +43,9 @@
       stepN.textContent = '0' + (s + 1);
       stepT.textContent = STEPS[s];
     }
-    floats.forEach((el) => el.classList.toggle('on', p >= +el.dataset.at));
+    // A card is shown from data-at and, if it has one, until data-to.
+    floats.forEach((el) => el.classList.toggle('on', p >= +el.dataset.at && p < +(el.dataset.to || 2)));
+    pill?.classList.toggle('away', p < 1);
     const y = p * innerHeight;
     // `translate` composes with the CSS `transform` used by the entrance animation.
     parallax.forEach((el) => (el.style.translate = `0 ${(+el.dataset.par * y).toFixed(1)}px`));
@@ -76,6 +79,17 @@
     setTimeout(() => type(queries[(q = (q + 1) % queries.length)]), 2400);
   };
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) type(queries[0]);
+
+  // Live countdown on the visit card.
+  const clock = document.getElementById('clock');
+  if (clock && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let left = 42 * 60 + 17;
+    const pad = (n) => String(n).padStart(2, '0');
+    setInterval(() => {
+      left = left > 0 ? left - 1 : 42 * 60 + 17;
+      clock.textContent = `00:${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
+    }, 1000);
+  }
 
   // Play background videos only while visible.
   const io = new IntersectionObserver((entries) => {

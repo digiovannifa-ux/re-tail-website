@@ -79,20 +79,26 @@
 
     <div class="device hero-phone" id="phone" data-screens="search product schedule pickup" aria-hidden="true"></div>
 
-    <div class="float f-prod" data-at="0" data-par="-0.2">
+    <!-- Floating "stickers" around the phone: each one appears at a step of the scroll (data-at). -->
+    <div class="float f-filter" data-at="0" data-to="0.72" data-par="-0.04"><div class="card">
+      <span class="tag">La tua ricerca</span>
+      <ul><li>Cappotto in lana<i></i></li><li>Taglia 42<i></i></li><li>Entro 2 km<i></i></li><li>Aperto adesso<i></i></li></ul>
+      <span class="go">Trovato in 3 negozi →</span>
+    </div></div>
+    <div class="float f-prod" data-at="0.1" data-par="-0.03"><div class="card">
       <img src="media/app/cappotto-beige.jpg" alt="">
-      <span><small>Corallo</small><b>Cappotto in lana · 42</b><em><i></i>Disponibile in 3 negozi</em></span>
-    </div>
-    <div class="float f-store" data-at="0.12" data-par="0.18">
-      <span class="av">SL</span><span><b>Sartoria Levante</b><small>Via Argiro 48 · 650 m</small></span><em>Ora aperto</em>
-    </div>
-    <div class="float f-zero" data-at="0.3" data-par="-0.15">Zero attese.</div>
-    <div class="float f-notif" data-at="0.48" data-par="0.08">
-      <img src="apple-touch-icon.png" alt="">
-      <span><small><b>Re·Tail</b><time>ora</time></small><b>Promemoria visita</b>Tra un'ora da Sartoria Levante: il cappotto ti aspetta in camerino.</span>
-    </div>
-    <div class="float f-chat" data-at="0.62" data-par="-0.1"><span class="k">Sartoria Levante</span>Te lo mettiamo in camerino anche in blu 🙂</div>
-    <div class="float f-code" data-at="0.78" data-par="0"><span data-qr="RT-2048" data-size="44"></span><span><small>Codice visita</small><b>RT-2048</b></span></div>
+      <span><em class="badge">★ C'è nella tua taglia</em><b>Cappotto in lana · 42</b><small>Corallo · €290</small></span>
+    </div></div>
+    <div class="float f-store" data-at="0.25" data-par="-0.05"><div class="card">
+      <span class="av">SL</span><span><b>Sartoria Levante</b><small>650 m · 8 min a piedi</small></span><em><i></i>Aperto</em>
+    </div></div>
+    <div class="float f-zero" data-at="0.35" data-par="-0.03"><div class="card">Zero resi.<br>Zero corrieri.</div></div>
+    <div class="float f-timer" data-at="0.5" data-par="-0.03"><div class="card">
+      <span class="tag">⏱ La tua visita tra</span><b class="clock" id="clock">00:42:17</b><small>Sartoria Levante · oggi 18:00</small>
+    </div></div>
+    <div class="float f-chat" data-at="0.75" data-par="0.04"><div class="card">
+      <span class="tag">Sartoria Levante · ora</span>Il 42 è pronto in camerino. Ti aspettiamo! 👋
+    </div></div>
   </div>
 </header>
 
@@ -177,7 +183,7 @@
       <div class="step">
         <div class="media">
           <video src="media/appendini.mp4" poster="media/appendini.jpg" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="chip avail"><span class="k"><i></i>Disponibile in 3 negozi</span><b>Taglia M · entro 10 km da te</b></div>
+          <div class="chip avail"><span class="k"><i></i>Disponibile adesso</span><b>Taglia M · 3 negozi a 10 km</b></div>
         </div>
         <div><span class="num">01</span><h3>Cerca il capo, non il negozio.</h3><p>Scrivi cosa cerchi, scegli la taglia. Re·Tail ti mostra i negozi della tua città che ce l'hanno davvero, con distanza e orari. Puoi sfogliare tutto il catalogo anche senza account.</p></div>
       </div>
@@ -191,7 +197,7 @@
       <div class="step">
         <div class="media">
           <video src="media/negozio.mp4" poster="media/negozio.jpg" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="chip"><span class="k">In camerino</span><b>Ti sta benissimo.</b></div>
+          <div class="chip fit"><span class="k">In camerino</span><b>Ti sta una favola.</b></div>
         </div>
         <div>
           <span class="num">03</span><h3>Provalo in negozio. Parla con chi lo vende.</h3>

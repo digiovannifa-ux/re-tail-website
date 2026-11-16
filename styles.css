@@ -67,7 +67,10 @@ figure { margin: 0; }
   border: 1px solid rgba(15, 34, 38, 0.08);
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(15, 34, 38, 0.12);
+  transition: opacity .4s, transform .5s var(--ease);
 }
+/* Hidden while the hero is on screen, where it would cover the big words. */
+.pill.away { opacity: 0; transform: translate(-50%, 24px); pointer-events: none; }
 .pill a { text-decoration: none; }
 .pill .lnk { font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 14px; border-radius: 999px; color: var(--text2); transition: background .2s, color .2s; }
 .pill .lnk:hover { background: var(--mint100); color: var(--em600); }
@@ -314,47 +317,88 @@ figure { margin: 0; }
 .hero-phone { --w: min(310px, 30vh, 62vw); position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-4deg); }
 @media (min-height: 760px) { .hero-phone { --w: min(320px, 38vh, 62vw); } }
 
-/* Floating app cards around the phone */
+/* Floating "stickers" around the phone. The outer .float handles the entrance (transform) and the
+   scroll parallax (translate); the inner .card bobs on its own, so the three never fight.
+   Cards hug the phone: --pw is the phone width, left cards end and right cards start --gap away from it. */
+.hero .stick { --pw: min(310px, 30vh, 62vw); --gap: 44px; --k: 1; }
+@media (min-height: 760px) { .hero .stick { --pw: min(320px, 38vh, 62vw); } }
+/* Shorter screens: smaller cards, so they still fit between the big words. */
+@media (max-height: 820px) { .hero .stick { --k: .84; } }
+@media (max-height: 680px) { .hero .stick { --k: .72; } }
 .float {
   position: absolute; z-index: 3;
-  background: var(--white); color: var(--ink);
-  border-radius: 16px; padding: 12px 14px;
-  font-size: 13px; line-height: 1.3;
-  box-shadow: 0 1px 2px rgba(15, 34, 38, .06), 0 22px 44px -14px rgba(15, 34, 38, 0.3);
-  opacity: 0; transform: translateY(30px) scale(.94);
-  transition: opacity .6s var(--ease), transform .8s var(--ease);
+  opacity: 0; transform: translateY(34px) scale(.9);
+  transition: opacity .5s var(--ease), transform .8s cubic-bezier(.34, 1.56, .64, 1);
   will-change: transform, opacity;
-  max-width: 270px;
+  scale: var(--k); transform-origin: top left;
 }
+.f-filter, .f-prod, .f-chat { transform-origin: top right; }
 .float.on { opacity: 1; transform: none; }
-.float .k { font: 500 10px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); display: block; margin-bottom: 6px; }
+.float .card {
+  position: relative; width: max-content; max-width: 280px;
+  background: var(--white); color: var(--ink);
+  border-radius: 18px; padding: 14px 16px;
+  font: 500 14px/1.3 var(--body);
+  box-shadow: 0 1px 2px rgba(15, 34, 38, .08), 0 24px 48px -16px rgba(15, 34, 38, .35);
+}
+.float.on .card { animation: bob 6s ease-in-out var(--d, 0s) infinite; }
+@keyframes bob { 50% { transform: translateY(-9px); } }
+.float .tag { display: block; font: 500 10.5px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
 .float b { font-weight: 700; }
 .float small { display: block; }
-.f-prod { left: 12vw; top: 27vh; display: flex; gap: 12px; align-items: center; padding: 8px 16px 8px 8px; }
-.f-prod img { width: 52px; height: 64px; object-fit: cover; border-radius: 8px; }
-.f-prod small { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); }
-.f-prod b { display: block; margin: 2px 0 5px; }
-.f-prod em { display: flex; align-items: center; gap: 6px; font-style: normal; font-size: 12px; font-weight: 700; color: var(--em600); }
-.f-prod em i { width: 7px; height: 7px; border-radius: 50%; background: var(--em400); box-shadow: 0 0 0 3px rgba(46, 168, 105, .2); animation: pulse 1.6s infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(46, 168, 105, 0); } }
-.f-store { right: 14vw; top: 24vh; display: flex; gap: 10px; align-items: center; }
-.av { width: 38px; height: 38px; border-radius: 50%; background: var(--em500); color: var(--white); display: grid; place-items: center; font: 700 13px var(--display); flex: none; }
+
+/* 1 · search filters that switch on one by one */
+.f-filter { right: calc(50% + var(--pw) / 2 + var(--gap)); top: 28vh; }
+.f-filter .card { background: var(--pine); color: var(--white); width: 230px; --d: .4s; }
+.f-filter .tag { color: var(--mint200); opacity: .7; }
+.f-filter ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.f-filter li { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
+.f-filter li i { position: relative; flex: none; width: 34px; height: 20px; border-radius: 999px; background: rgba(255, 255, 255, .18); transition: background .3s; }
+.f-filter li i::after { content: ''; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--white); transition: transform .35s cubic-bezier(.34, 1.56, .64, 1); }
+.f-filter.on li i { background: var(--em400); }
+.f-filter.on li i::after { transform: translateX(14px); }
+.f-filter li:nth-child(1) i, .f-filter li:nth-child(1) i::after { transition-delay: .35s; }
+.f-filter li:nth-child(2) i, .f-filter li:nth-child(2) i::after { transition-delay: .6s; }
+.f-filter li:nth-child(3) i, .f-filter li:nth-child(3) i::after { transition-delay: .85s; }
+.f-filter li:nth-child(4) i, .f-filter li:nth-child(4) i::after { transition-delay: 1.1s; }
+.f-filter .go { display: block; margin-top: 14px; padding: 10px 12px; border-radius: 10px; background: var(--pink); text-align: center; font: 700 12px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; opacity: 0; transform: translateY(6px); transition: opacity .4s 1.45s, transform .4s 1.45s; }
+.f-filter.on .go { opacity: 1; transform: none; }
+
+/* 2 · the item, found */
+.f-prod { right: calc(50% + var(--pw) / 2 + var(--gap) + 40px); top: calc(28vh + 236px * var(--k)); }
+.f-prod .card { display: flex; gap: 12px; align-items: center; padding: 8px 18px 8px 8px; --d: 1.2s; }
+.f-prod img { width: 56px; height: 70px; object-fit: cover; border-radius: 10px; }
+.f-prod .badge { display: inline-block; font: 700 10px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; font-style: normal; color: var(--white); background: var(--pink); padding: 5px 8px; border-radius: 999px; margin-bottom: 7px; }
+.f-prod b { display: block; font-size: 15px; }
+.f-prod small { color: var(--text2); font-size: 12.5px; margin-top: 3px; }
+
+/* 3 · the store, open now */
+.f-store { left: calc(50% + var(--pw) / 2 + var(--gap)); top: 26vh; }
+.f-store .card { display: flex; gap: 11px; align-items: center; padding: 10px 12px 10px 10px; --d: .8s; }
+.av { width: 40px; height: 40px; border-radius: 50%; background: var(--em500); color: var(--white); display: grid; place-items: center; font: 700 13px var(--display); flex: none; }
 .f-store b, .f-store small { white-space: nowrap; }
-.f-store small { color: var(--text2); font-size: 12px; }
-.f-store em { margin-left: 6px; font-style: normal; padding: 5px 8px; border-radius: 999px; background: var(--mint100); color: var(--em600); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
-.f-zero { left: 24vw; top: 40vh; background: var(--pink); color: var(--white); font: 800 19px/1 var(--display); letter-spacing: -0.02em; padding: 14px 18px; border-radius: 999px; }
-.f-zero.on { transform: rotate(-6deg); }
-.f-notif { right: 8vw; top: 62vh; display: flex; gap: 11px; align-items: flex-start; max-width: 320px; background: rgba(255, 255, 255, .78); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border-radius: 22px; padding: 12px 14px; }
-.f-notif img { width: 38px; height: 38px; border-radius: 9px; flex: none; }
-.f-notif small { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--text2); margin-bottom: 3px; }
-.f-notif small b { font-weight: 600; }
-.f-notif > span > b { display: block; }
-.f-chat { left: 14vw; top: 58vh; border-radius: 18px 18px 18px 4px; background: var(--em500); color: var(--white); }
-.f-chat .k { color: var(--mint200); }
-.f-code { left: 30vw; top: 78vh; display: flex; gap: 12px; align-items: center; padding: 8px 14px 8px 8px; }
-.f-code [data-qr] { padding: 4px; border: 1px solid var(--line); border-radius: 8px; }
-.f-code small { font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text3); }
-.f-code b { display: block; margin-top: 5px; font: 500 17px/1 var(--mono); letter-spacing: .14em; color: var(--pine); }
+.f-store small { color: var(--text2); font-size: 12.5px; margin-top: 2px; }
+.f-store em { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; font-style: normal; padding: 6px 10px; border-radius: 999px; background: var(--mint100); color: var(--em600); font: 700 10.5px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.f-store em i, .chip.avail .k i { width: 7px; height: 7px; border-radius: 50%; background: var(--em400); animation: pulse 1.6s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(46, 168, 105, .5); } 100% { box-shadow: 0 0 0 8px rgba(46, 168, 105, 0); } }
+
+/* 4 · pink sticker */
+.f-zero { left: calc(50% + var(--pw) / 2 - 30px); top: 40vh; z-index: 4; }
+.f-zero .card { background: var(--pink); color: var(--white); font: 800 22px/1.02 var(--display); letter-spacing: -.02em; text-transform: uppercase; padding: 16px 20px; border-radius: 16px; transform: rotate(-7deg); box-shadow: 0 18px 36px -12px rgba(215, 91, 160, .6); }
+.f-zero.on .card { animation: wobble 5s ease-in-out infinite; }
+@keyframes wobble { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(-3deg) translateY(-6px); } }
+
+/* 5 · live countdown to the visit */
+.f-timer { left: calc(50% + var(--pw) / 2 + var(--gap) + 70px); top: calc(40vh + 125px * var(--k)); }
+.f-timer .card { background: var(--mint200); --d: 2s; }
+.f-timer .tag { color: var(--em600); }
+.f-timer .clock { display: block; font: 500 30px/1 var(--mono); letter-spacing: .04em; color: var(--pine); font-variant-numeric: tabular-nums; }
+.f-timer small { margin-top: 8px; font-size: 12.5px; color: var(--em600); }
+
+/* 6 · the store writes back */
+.f-chat { right: calc(50% + var(--pw) / 2 + var(--gap)); top: 33vh; }
+.f-chat .card { background: var(--em500); color: var(--white); border-radius: 20px 20px 20px 6px; max-width: 250px; font-size: 15px; --d: .2s; }
+.f-chat .tag { color: var(--mint200); }
 
 /* ---------- TICKER ---------- */
 .ticker { background: var(--pine); color: var(--white); overflow: hidden; padding: 22px 0; }
@@ -437,10 +481,13 @@ figure { margin: 0; }
 .step p { color: var(--text2); max-width: 440px; }
 .chip { position: absolute; left: 18px; bottom: 18px; background: var(--white); border-radius: 14px; padding: 12px 14px; font-size: 14px; box-shadow: 0 14px 30px -10px rgba(0,0,0,.35); }
 .chip .k { font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text3); display: block; margin-bottom: 6px; }
-.chip.avail { background: var(--mint50); border: 1px solid var(--mint200); }
-.chip.avail .k { display: flex; align-items: center; gap: 7px; font: 700 11px/1 var(--body); letter-spacing: .07em; color: var(--em600); }
-.chip.avail .k i { width: 7px; height: 7px; border-radius: 50%; background: var(--em400); }
+.chip.avail { background: var(--pine); color: var(--white); }
+.chip.avail b { font-size: 16px; }
+.chip.avail .k { display: flex; align-items: center; gap: 7px; font: 700 11px/1 var(--body); letter-spacing: .08em; color: var(--mint200); }
 .chip.code { display: flex; gap: 12px; align-items: center; padding: 10px 16px 10px 10px; }
+.chip.fit { background: var(--pink); color: var(--white); transform: rotate(-4deg); padding: 14px 18px; }
+.chip.fit .k { color: rgba(255, 255, 255, .75); }
+.chip.fit b { font: 800 22px/1 var(--display); letter-spacing: -.02em; text-transform: uppercase; }
 .chip.code b { font-family: var(--mono); font-weight: 500; color: var(--pine); letter-spacing: .14em; font-size: 18px; }
 .bubbles { display: flex; flex-direction: column; gap: 8px; margin-top: 26px; max-width: 380px; }
 .bub { padding: 11px 14px; border-radius: 16px; font-size: 15px; max-width: 85%; }
@@ -534,14 +581,6 @@ footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
 .doc li + li { margin-top: 6px; }
 .todo { background: #FFF3C4; padding: 0 4px; border-radius: 3px; }
 
-@media (max-width: 1100px) {
-  .f-prod { left: 4vw; }
-  .f-store { right: 4vw; }
-  .f-notif { right: 3vw; }
-  .f-chat { left: 5vw; }
-  .f-code { left: 26vw; }
-  .f-zero { left: 14vw; }
-}
 
 @media (max-width: 860px) {
   body { font-size: 16px; }
@@ -552,25 +591,30 @@ footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
   .hero-sub p, .hero-sub .btn.ghost { display: none; }
   .hero-sub .hero-cta { margin-top: 0; }
   .hero-sub .btn.pink { padding: 12px 18px; font-size: 11px; box-shadow: 0 8px 20px rgba(215, 91, 160, .3); }
-  .hero-step { top: auto; bottom: 100px; right: 50%; transform: translateX(50%); }
+  .hero-step { display: none; }
   .bars { justify-content: center; }
   .hero-phone { --w: min(220px, 50vw, 32vh); }
-  .float { font-size: 11px; padding: 8px 10px; max-width: 180px; border-radius: 12px; }
-  .f-prod { left: 3vw; top: 30vh; padding: 6px 10px 6px 6px; gap: 8px; }
-  .f-prod img { width: 36px; height: 44px; border-radius: 6px; }
+  .hero .stick { --pw: min(220px, 50vw, 32vh); --k: 1; }
+  .float .card { font-size: 11px; padding: 8px 10px; max-width: 160px; border-radius: 12px; }
+  .float .tag { font-size: 8.5px; margin-bottom: 5px; }
+  .f-filter, .f-chat { display: none; }
+  .f-prod { right: auto; left: 3vw; top: 27vh; }
+  .f-prod .card { padding: 6px 10px 6px 6px; gap: 8px; }
+  .f-prod img { width: 38px; height: 48px; border-radius: 7px; }
+  .f-prod .card { max-width: 190px; }
+  .f-prod .badge { font-size: 8px; padding: 4px 6px; margin-bottom: 4px; white-space: nowrap; }
+  .f-prod b { white-space: nowrap; }
   .f-prod b { font-size: 11px; }
-  .f-prod em { font-size: 10px; white-space: nowrap; }
-  .f-store { right: 3vw; top: 24vh; }
-  .f-store em, .f-store small { display: none; }
+  .f-prod small { font-size: 10px; }
+  .f-store { left: auto; right: 3vw; top: 37vh; }
+  .f-store .card { padding: 6px 8px 6px 6px; gap: 7px; }
+  .f-store small, .f-store em { display: none; }
   .av { width: 28px; height: 28px; font-size: 11px; }
-  .f-zero { left: auto; right: 3vw; top: 46vh; font-size: 14px; padding: 10px 13px; }
-  .f-notif { right: 3vw; left: auto; top: 64vh; max-width: 190px; border-radius: 16px; padding: 9px 10px; gap: 8px; }
-  .f-notif small { font-size: 9px; }
-  .f-notif img { width: 28px; height: 28px; border-radius: 7px; }
-  .f-chat { display: none; }
-  .f-code { left: 3vw; top: 66vh; padding: 6px 10px 6px 6px; }
-  .f-code b { font-size: 13px; }
-  .f-code [data-qr] svg { width: 30px; height: 30px; }
+  .f-zero { left: auto; right: 2vw; top: 54vh; }
+  .f-zero .card { font-size: 14px; padding: 10px 12px; border-radius: 12px; }
+  .f-timer { left: 3vw; top: 62vh; }
+  .f-timer .clock { font-size: 17px; }
+  .f-timer small { display: none; }
   .sec-head { margin-bottom: 50px; }
   .trio { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -20px; padding: 0 20px 20px; scrollbar-width: none; }
   .trio::-webkit-scrollbar { display: none; }
@@ -723,5 +767,6 @@ html { scroll-padding-top: var(--bar); }
 
 @media (prefers-reduced-motion: reduce) {
   .row, .tk, .rings i, .caret { animation: none; }
-  .float, .scr, .reveal .w { transition: none; }
+  .float, .scr, .reveal .w, .f-filter li i, .f-filter li i::after, .f-filter .go { transition: none; }
+  .float.on .card, .f-zero.on .card, .f-store em i, .chip.avail .k i { animation: none; }
 }
