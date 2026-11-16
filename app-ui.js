@@ -2,6 +2,12 @@
 // with its colours, fonts, icons and copy (src/theme/retail.ts, src/components/retail/*).
 // Stores, brands and products are made up for the website; photos are from Unsplash.
 (() => {
+  // English on the /en/ pages (<html lang="en">), Italian elsewhere. Copy follows the app's own translations
+  // (src/lib/i18n-en.ts). Assets resolve from this script's folder, so /en/ pages find them too.
+  const EN = document.documentElement.lang === 'en';
+  const t = (it, en) => (EN ? en : it);
+  const BASE = new URL('.', document.currentScript.src).href;
+
   // ---------- icons (same paths as src/components/retail/icon.tsx) ----------
   const P = {
     back: '<path d="m15 18-6-6 6-6"/>',
@@ -34,22 +40,22 @@
     `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="${fill}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name]}</svg>`;
 
   // ---------- data (invented for the website) ----------
-  const IMG = (n) => `media/app/${n}.jpg`;
+  const IMG = (n) => `${BASE}media/app/${n}.jpg`;
   const PROD = {
-    coat: { img: 'cappotto-beige', brand: 'Corallo', item: 'Cappotto in lana doppiopetto', price: '€290', avail: '3 negozi · 650 m' },
-    red: { img: 'cappotto-rosso', brand: 'Corallo', item: 'Cappotto con cintura', price: '€320', avail: '2 negozi · 1,1 km' },
-    leather: { img: 'giacca', brand: 'Atelier 9', item: 'Giacca in pelle', price: '€390', avail: '1 negozio · 1,4 km' },
-    knit: { img: 'maglione', brand: 'Vento', item: 'Maglione a coste in lana', price: '€120', avail: '4 negozi · 650 m' },
-    bag: { img: 'borsa', brand: 'Ottobre', item: 'Borsa a mano in pelle', price: '€240' },
-    sneaker: { img: 'sneakers', brand: 'Nodo', item: 'Sneakers in pelle e suede', price: '€165' },
-    jeans: { img: 'jeans', brand: 'Marea', item: 'Jeans slim in cimosa', price: '€140' },
-    shirt: { img: 'camicia', brand: 'Atelier 9', item: 'Camicia in popeline', price: '€95' },
+    coat: { img: 'cappotto-beige', brand: 'Corallo', item: t('Cappotto in lana doppiopetto', 'Double-breasted wool coat'), price: '€290', avail: t('3 negozi · 650 m', '3 stores · 650 m') },
+    red: { img: 'cappotto-rosso', brand: 'Corallo', item: t('Cappotto con cintura', 'Belted coat'), price: '€320', avail: t('2 negozi · 1,1 km', '2 stores · 1.1 km') },
+    leather: { img: 'giacca', brand: 'Atelier 9', item: t('Giacca in pelle', 'Leather jacket'), price: '€390', avail: t('1 negozio · 1,4 km', '1 store · 1.4 km') },
+    knit: { img: 'maglione', brand: 'Vento', item: t('Maglione a coste in lana', 'Ribbed wool jumper'), price: '€120', avail: t('4 negozi · 650 m', '4 stores · 650 m') },
+    bag: { img: 'borsa', brand: 'Ottobre', item: t('Borsa a mano in pelle', 'Leather handbag'), price: '€240' },
+    sneaker: { img: 'sneakers', brand: 'Nodo', item: t('Sneakers in pelle e suede', 'Leather and suede sneakers'), price: '€165' },
+    jeans: { img: 'jeans', brand: 'Marea', item: t('Jeans slim in cimosa', 'Slim selvedge jeans'), price: '€140' },
+    shirt: { img: 'camicia', brand: 'Atelier 9', item: t('Camicia in popeline', 'Poplin shirt'), price: '€95' },
   };
   const STORES = [
-    { mono: 'SL', name: 'Sartoria Levante', kind: 'Multi-brand · Donna/Uomo', addr: 'Via Argiro 48', dist: '650 m' },
-    { mono: 'BV', name: 'Bottega Ventuno', kind: 'Designer · Donna', addr: 'Corso Cavour 112', dist: '1,1 km' },
-    { mono: 'AC', name: 'Atelier Corallo', kind: 'Boutique · Donna', addr: 'Via Sparano 31', dist: '1,4 km' },
-    { mono: 'SM', name: 'Studio Marea', kind: 'Concept store', addr: 'Via Putignani 70', dist: '2,0 km' },
+    { mono: 'SL', name: 'Sartoria Levante', kind: t('Multi-brand · Donna/Uomo', 'Multi-brand · Women/Men'), addr: 'Via Argiro 48', dist: '650 m' },
+    { mono: 'BV', name: 'Bottega Ventuno', kind: t('Designer · Donna', 'Designer · Women'), addr: 'Corso Cavour 112', dist: t('1,1 km', '1.1 km') },
+    { mono: 'AC', name: 'Atelier Corallo', kind: t('Boutique · Donna', 'Boutique · Women'), addr: 'Via Sparano 31', dist: t('1,4 km', '1.4 km') },
+    { mono: 'SM', name: 'Studio Marea', kind: 'Concept store', addr: 'Via Putignani 70', dist: t('2,0 km', '2.0 km') },
   ];
 
   // ---------- QR code look-alike (deterministic, with the three finder squares) ----------
@@ -86,7 +92,7 @@
     <div class="hd"><div class="hd-row">${title ? `<span class="wm-t">${title}<i>.</i></span>` : wordmark}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
   const headPush = (extra = '') => `
     <div class="hd push"><div class="hd-row">${ic('back', 26, '#11110F', 1.8)}<span class="hd-ic">${ic('pin', 25, '#11110F', 1.6)}${ic('chat', 24, '#11110F', 1.6)}</span></div>${extra}</div>`;
-  const TABS = [['home', 'Home'], ['search', 'Cerca'], ['tag', 'Brand'], ['map', 'Mappa'], ['heart', 'Wishlist'], ['user', 'Io']];
+  const TABS = [['home', 'Home'], ['search', t('Cerca', 'Search')], ['tag', t('Brand', 'Brands')], ['map', t('Mappa', 'Map')], ['heart', 'Wishlist'], ['user', t('Io', 'Me')]];
   const nav = (active) => `
     <div class="nav">${TABS.map(([k, l]) => {
       const on = k === active;
@@ -128,11 +134,11 @@
   const S = {};
 
   S.search = () => `
-    ${headTab(`<div class="hd-search">${ic('search', 20, '#9A968B', 1.7)}<span id="typed">cappotto</span><span class="caret"></span></div>`, 'Cerca')}
+    ${headTab(`<div class="hd-search">${ic('search', 20, '#9A968B', 1.7)}<span id="typed">${t('cappotto', 'coat')}</span><span class="caret"></span></div>`, t('Cerca', 'Search'))}
     <div class="bd">
-      <div class="crumb">Donna · Risultati</div>
-      <div class="ttl">Cappotti e giacche</div>
-      <div class="meta">18 capi · 10 km da te</div>
+      <div class="crumb">${t('Donna · Risultati', 'Women · Results')}</div>
+      <div class="ttl">${t('Cappotti e giacche', 'Coats and jackets')}</div>
+      <div class="meta">${t('18 capi · 10 km da te', '18 items · 10 km from you')}</div>
       <div class="grid">${[PROD.coat, PROD.red, PROD.leather, PROD.knit].map(card).join('')}</div>
     </div>
     ${nav('search')}`;
@@ -144,17 +150,17 @@
       <div class="pd">
         <div class="pd-b">Corallo</div>
         <div class="pd-n">Cappotto in lana doppiopetto</div>
-        <div class="pd-row"><b>€290</b><span>Disponibile</span></div>
-        <div class="lbl">Taglia</div>
+        <div class="pd-row"><b>€290</b><span>${t('Disponibile', 'Available')}</span></div>
+        <div class="lbl">${t('Taglia', 'Size')}</div>
         <div class="sizes"><span>38</span><span>40</span><span class="on">42</span><span>44</span><span class="out">46</span></div>
         <div class="avail">
-          <div class="avail-h"><i></i>Disponibile in 3 negozi</div>
-          <div class="avail-s">entro 10 km da te · tocca per prenotare il ritiro</div>
-          ${STORES.slice(0, 2).map((s, i) => `<div class="avail-r">${ic('pin', 16, '#11110F', 1.6)}<div><b>${s.name}</b><small>${s.addr} · ${s.dist}</small></div><em>${i ? 1 : 2} pz</em></div>`).join('')}
+          <div class="avail-h"><i></i>${t('Disponibile in 3 negozi', 'Available in 3 stores')}</div>
+          <div class="avail-s">${t('entro 10 km da te · tocca per prenotare il ritiro', 'within 10 km of you · tap to book a visit')}</div>
+          ${STORES.slice(0, 2).map((s, i) => `<div class="avail-r">${ic('pin', 16, '#11110F', 1.6)}<div><b>${s.name}</b><small>${s.addr} · ${s.dist}</small></div><em>${i ? 1 : 2} ${t('pz', 'pcs')}</em></div>`).join('')}
         </div>
       </div>
     </div>
-    <div class="pd-cta"><span class="btn-pine">${ic('pin', 16, '#fff', 1.8)}Prenota taglia 42 in negozio</span></div>
+    <div class="pd-cta"><span class="btn-pine">${ic('pin', 16, '#fff', 1.8)}${t('Prenota taglia 42 in negozio', 'Book size 42 in store')}</span></div>
     ${nav('search')}`;
   S.product = productBody;
 
@@ -162,14 +168,14 @@
     ${productBody()}
     <div class="dim"></div>
     <div class="sheet">
-      <div class="sheet-h"><span>Prenota la visita</span><i>${ic('close', 16, '#11110F', 2)}</i></div>
-      <div class="sheet-s">Sartoria Levante · 1 capo — scegli quando passare a provarli.</div>
-      <div class="note">${ic('info', 17, '#C0398A', 1.8)}<span>Prenoti la <b>visita</b>, non il capo: l'articolo resta in vendita fino al tuo arrivo e potrebbe non essere più disponibile.</span></div>
-      <div class="lbl">Oggi · mercoledì 4</div>
+      <div class="sheet-h"><span>${t('Prenota la visita', 'Book your visit')}</span><i>${ic('close', 16, '#11110F', 2)}</i></div>
+      <div class="sheet-s">${t('Sartoria Levante · 1 capo — scegli quando passare a provarli.', 'Sartoria Levante · 1 item — choose when to come and try it on.')}</div>
+      <div class="note">${ic('info', 17, '#C0398A', 1.8)}<span>${t("Prenoti la <b>visita</b>, non il capo: l'articolo resta in vendita fino al tuo arrivo e potrebbe non essere più disponibile.", 'You book the <b>visit</b>, not the item: it stays on sale until you arrive and may no longer be available.')}</span></div>
+      <div class="lbl">${t('Oggi · mercoledì 4', 'Today · Wednesday 4')}</div>
       <div class="slot">17:00 – 18:00</div>
       <div class="slot on">18:00 – 19:00 ${ic('check', 18, '#fff', 2.2)}</div>
       <div class="slot">19:00 – 20:00</div>
-      <div class="lbl">Domani · giovedì 5</div>
+      <div class="lbl">${t('Domani · giovedì 5', 'Tomorrow · Thursday 5')}</div>
       <div class="slot">10:00 – 11:00</div>
       <div class="slot">11:00 – 12:00</div>
     </div>`;
@@ -180,21 +186,21 @@
       <div class="pk-map">${streetMap(pinAt(206, 150))}</div>
       <div class="pk">
         <span class="pk-ok">${ic('check', 30, '#1C7A4E', 2)}</span>
-        <div class="pk-t">Visita prenotata</div>
-        <p>Da <b>Sartoria Levante</b> · <b>Oggi, 18:00–19:00</b>. Mostra il codice in negozio quando arrivi.</p>
+        <div class="pk-t">${t('Visita prenotata', 'Visit booked')}</div>
+        <p>${t('Da <b>Sartoria Levante</b> · <b>Oggi, 18:00–19:00</b>. Mostra il codice in negozio quando arrivi.', 'At <b>Sartoria Levante</b> · <b>Today, 18:00–19:00</b>. Show the code in the store when you arrive.')}</p>
         <div class="pk-qr">${qr('RT-2048', 132)}<span>RT-2048</span></div>
       </div>
-      <div class="pk-cta"><span class="btn-pine">${ic('navigate', 17, '#fff', 1.8)}Indicazioni · 9 min a piedi</span></div>
+      <div class="pk-cta"><span class="btn-pine">${ic('navigate', 17, '#fff', 1.8)}${t('Indicazioni · 9 min a piedi', 'Directions · 9 min walk')}</span></div>
     </div>
     ${nav('home')}`;
 
   S.map = () => `
-    ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · raggio <b>10 km</b></span><em>Cambia</em></div>`, 'Mappa')}
+    ${headTab(`<div class="hd-loc">${ic('pin', 18, '#1C7A4E', 1.8)}<span>Bari · ${t('raggio', 'radius')} <b>10 km</b></span><em>${t('Cambia', 'Change')}</em></div>`, t('Mappa', 'Map'))}
     <div class="bd">
-      <div class="chips"><span>Genere${ic('chevronDown', 14, '#11110F', 2)}</span><span>Categoria${ic('chevronDown', 14, '#11110F', 2)}</span></div>
+      <div class="chips"><span>${t('Genere', 'Gender')}${ic('chevronDown', 14, '#11110F', 2)}</span><span>${t('Categoria', 'Category')}${ic('chevronDown', 14, '#11110F', 2)}</span></div>
       <div class="mapbox">${streetMap(pinAt(140, 96) + pinAt(262, 150) + pinAt(318, 70) + pinAt(84, 196))}
         <span class="mapbtn" style="top:12px">${ic('plus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="top:56px">${ic('minus', 18, '#11110F', 1.8)}</span><span class="mapbtn" style="bottom:12px">${ic('locate', 18, '#11110F', 1.7)}</span></div>
-      <div class="sec-h"><span>Negozi vicino a te</span><small>4 negozi</small></div>
+      <div class="sec-h"><span>${t('Negozi vicino a te', 'Stores near you')}</span><small>${t('4 negozi', '4 stores')}</small></div>
       ${STORES.map((s) => `<div class="st-r">${mono(s)}<div><b>${s.name}</b><small>${s.kind}</small><small class="l">${s.addr} · ${s.dist}</small></div>${ic('chevronRight', 18, '#C2BEB2', 1.8)}</div>`).join('')}
     </div>
     ${nav('map')}`;
@@ -202,48 +208,48 @@
   S.store = () => `
     ${headPush()}
     <div class="bd">
-      <div class="so-ph"><img src="media/foto/negozio-4.jpg" alt=""><img src="media/foto/negozio-9.jpg" alt=""></div>
+      <div class="so-ph"><img src="${BASE}media/foto/negozio-4.jpg" alt=""><img src="${BASE}media/foto/negozio-9.jpg" alt=""></div>
       <div class="so">
         <span class="so-mono">Sartoria<br>Levante</span>
         <div class="so-n">Sartoria Levante</div>
         <div class="so-k">Multi-brand · Bari</div>
-        <p>Dal 1987 in via Argiro: capispalla, maglieria e piccoli marchi italiani scelti uno per uno.</p>
+        <p>${t('Dal 1987 in via Argiro: capispalla, maglieria e piccoli marchi italiani scelti uno per uno.', 'On Via Argiro since 1987: outerwear, knitwear and small Italian labels, chosen one by one.')}</p>
         <div class="so-r">${ic('pin', 18, '#11110F', 1.6)}<span>Via Argiro 48</span><small>650 m</small></div>
-        <div class="so-r">${ic('clock', 18, '#11110F', 1.6)}<span>Aperto · 09:30–20:00</span><em>Ora aperto</em></div>
-        <div class="lbl">In negozio ora</div>
+        <div class="so-r">${ic('clock', 18, '#11110F', 1.6)}<span>${t('Aperto', 'Open')} · 09:30–20:00</span><em>${t('Ora aperto', 'Open now')}</em></div>
+        <div class="lbl">${t('In negozio ora', 'In store now')}</div>
         <div class="so-strip">${[PROD.coat, PROD.bag, PROD.sneaker, PROD.jeans].map((p) => `<div><img src="${IMG(p.img)}" alt=""><b>${p.brand}</b><small>${p.price}</small></div>`).join('')}</div>
       </div>
     </div>
     ${nav('map')}`;
 
   S.chat = () => `
-    ${headPush(`<div class="ch-h">${mono(STORES[0], 38)}<div><b>Sartoria Levante</b><small><i></i>Risponde di solito in 10 min</small></div></div>`)}
+    ${headPush(`<div class="ch-h">${mono(STORES[0], 38)}<div><b>Sartoria Levante</b><small><i></i>${t('Risponde di solito in 10 min', 'Usually replies in 10 min')}</small></div></div>`)}
     <div class="bd ch">
-      <div class="ch-day">Oggi</div>
-      <div class="bub them">Ciao Giulia! Sono Marta di Sartoria Levante. Come possiamo aiutarti?<small>17:02</small></div>
-      <div class="bub me">Ciao! Il cappotto Corallo lo avete anche in blu, taglia 42?<small>17:04</small></div>
-      <div class="bub them">Sì, ne abbiamo uno. Te lo mettiamo in camerino con il beige, così li provi entrambi.<small>17:06</small></div>
-      <div class="bub me">Perfetto, passo alle 18 👍<small>17:06</small></div>
-      <div class="ch-in"><span>Scrivi un messaggio</span><i>${ic('send', 19, '#fff', 1.8)}</i></div>
+      <div class="ch-day">${t('Oggi', 'Today')}</div>
+      <div class="bub them">${t('Ciao Giulia! Sono Marta di Sartoria Levante. Come possiamo aiutarti?', 'Hi Giulia! I\'m Marta from Sartoria Levante. How can we help?')}<small>17:02</small></div>
+      <div class="bub me">${t('Ciao! Il cappotto Corallo lo avete anche in blu, taglia 42?', 'Hi! Do you have the Corallo coat in blue too, size 42?')}<small>17:04</small></div>
+      <div class="bub them">${t('Sì, ne abbiamo uno. Te lo mettiamo in camerino con il beige, così li provi entrambi.', 'Yes, we have one. We\'ll put it in the fitting room with the beige one, so you can try both.')}<small>17:06</small></div>
+      <div class="bub me">${t('Perfetto, passo alle 18 👍', 'Perfect, I\'ll come by at 6 👍')}<small>17:06</small></div>
+      <div class="ch-in"><span>${t('Scrivi un messaggio', 'Write a message')}</span><i>${ic('send', 19, '#fff', 1.8)}</i></div>
     </div>
     ${nav('home')}`;
 
   // The store side (base of the Retailer Dashboard): today's visits.
   S.partner = () => `
-    <div class="hd"><div class="hd-row">${wordmark}<span class="pt-badge">Negozio</span></div></div>
+    <div class="hd"><div class="hd-row">${wordmark}<span class="pt-badge">${t('Negozio', 'Store')}</span></div></div>
     <div class="bd">
-      <div class="crumb">Sartoria Levante · mercoledì 4</div>
-      <div class="ttl">Visite di oggi</div>
-      <div class="pt-stats"><div><b>6</b><small>Visite</small></div><div><b>2</b><small>In arrivo</small></div><div class="hot"><b>1</b><small>Chat</small></div></div>
+      <div class="crumb">${t('Sartoria Levante · mercoledì 4', 'Sartoria Levante · Wednesday 4')}</div>
+      <div class="ttl">${t('Visite di oggi', 'Today\'s visits')}</div>
+      <div class="pt-stats"><div><b>6</b><small>${t('Visite', 'Visits')}</small></div><div><b>2</b><small>${t('In arrivo', 'Arriving')}</small></div><div class="hot"><b>1</b><small>Chat</small></div></div>
       ${[
-        ['17:00', 'Luca R.', 'Nodo · Sneakers · 42', 'Ritirato', 'done'],
-        ['18:00', 'Giulia M.', 'Corallo · Cappotto · 42', 'In arrivo', 'next'],
-        ['18:00', 'Sara P.', 'Vento · Maglione · M', 'Confermata', ''],
-        ['19:00', 'Marco D.', 'Marea · Jeans · 32', 'Confermata', ''],
+        ['17:00', 'Luca R.', 'Nodo · Sneakers · 42', t('Ritirato', 'Collected'), 'done'],
+        ['18:00', 'Giulia M.', t('Corallo · Cappotto · 42', 'Corallo · Coat · 42'), t('In arrivo', 'Arriving'), 'next'],
+        ['18:00', 'Sara P.', t('Vento · Maglione · M', 'Vento · Jumper · M'), t('Confermata', 'Confirmed'), ''],
+        ['19:00', 'Marco D.', 'Marea · Jeans · 32', t('Confermata', 'Confirmed'), ''],
       ].map(([t, n, it, st, c]) => `<div class="pt-r"><span class="pt-t">${t}</span><div><b>${n}</b><small>${it}</small></div><em class="${c}">${st}</em></div>`).join('')}
-      <div class="pt-cta"><span class="btn-pine">${ic('qr', 17, '#fff', 1.8)}Scansiona il codice</span></div>
+      <div class="pt-cta"><span class="btn-pine">${ic('qr', 17, '#fff', 1.8)}${t('Scansiona il codice', 'Scan the code')}</span></div>
     </div>
-    <div class="nav partner">${[['grid', 'Oggi'], ['calendar', 'Agenda'], ['box', 'Stock'], ['chat', 'Chat'], ['users', 'Clienti']]
+    <div class="nav partner">${[['grid', t('Oggi', 'Today')], ['calendar', t('Agenda', 'Calendar')], ['box', 'Stock'], ['chat', 'Chat'], ['users', t('Clienti', 'Customers')]]
       .map(([k, l], i) => `<span class="nav-i${i ? '' : ' on'}">${ic(k, 23, i ? '#B8B4A8' : '#1C7A4E', 1.6)}<em>${l}</em></span>`).join('')}</div>`;
 
   // ---------- mount ----------

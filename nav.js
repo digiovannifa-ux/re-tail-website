@@ -6,7 +6,7 @@
   const setMenu = (open) => {
     panel.classList.toggle('open', open);
     menuBtn.setAttribute('aria-expanded', open);
-    menuBtn.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+    menuBtn.setAttribute('aria-label', document.documentElement.lang === 'en' ? (open ? 'Close the menu' : 'Open the menu') : (open ? 'Chiudi il menu' : 'Apri il menu'));
   };
   menuBtn.addEventListener('click', () => setMenu(!panel.classList.contains('open')));
   panel.addEventListener('click', (e) => e.target.closest('a') && setMenu(false));

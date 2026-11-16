@@ -16,7 +16,10 @@
   const bars = [...document.querySelectorAll('.bars i')];
   const stepN = document.getElementById('stepN');
   const stepT = document.getElementById('stepT');
-  const STEPS = ['Cerca il capo', 'Scegli la taglia', 'Prenota la visita', 'Provalo in negozio'];
+  const EN = document.documentElement.lang === 'en';
+  const STEPS = EN
+    ? ['Find the item', 'Pick your size', 'Book your visit', 'Try it in store']
+    : ['Cerca il capo', 'Scegli la taglia', 'Prenota la visita', 'Provalo in negozio'];
 
   // Manifesto: split into words; *word* marks the green ones.
   const reveal = document.getElementById('reveal');
@@ -65,7 +68,7 @@
 
   // Typing effect in the search bar of the first screen.
   const typed = document.getElementById('typed');
-  const queries = ['cappotto', 'cappotto in lana', 'giacca'];
+  const queries = EN ? ['coat', 'wool coat', 'jacket'] : ['cappotto', 'cappotto in lana', 'giacca'];
   let q = 0;
   const type = (text, i = 0) => {
     typed.textContent = text.slice(0, i);
