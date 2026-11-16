@@ -229,6 +229,7 @@ figure { margin: 0; }
 .f-store { left: calc(50% + var(--pw) / 2 + var(--gap)); top: 26vh; }
 .f-store .card { display: flex; gap: 11px; align-items: center; padding: 10px 12px 10px 10px; --d: .8s; }
 .av { width: 40px; height: 40px; border-radius: 50%; background: var(--em500); color: var(--white); display: grid; place-items: center; font: 700 13px var(--display); flex: none; }
+.av.logo { border-radius: 10px; background: var(--white); object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
 .f-store b, .f-store small { white-space: nowrap; }
 .f-store small { color: var(--text2); font-size: 12.5px; margin-top: 2px; }
 .f-store em { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; font-style: normal; padding: 6px 10px; border-radius: 999px; background: var(--mint100); color: var(--em600); font: 700 10.5px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
@@ -298,47 +299,41 @@ figure { margin: 0; }
 .vs-card.new { background: var(--pine); color: var(--white); }
 .vs.in .vs-card { transform: none; opacity: 1; }
 
-/* the map */
-.map { position: relative; aspect-ratio: 600 / 420; margin: 14px 14px 0; border-radius: 18px; overflow: hidden; }
-.old .map { background: #DCD7CB; }
-.new .map { background: #0A171A; }
+/* the map: the app's own map (OpenStreetMap tiles of the Murattiano, Bari) with its store pins */
+.map { position: relative; aspect-ratio: 960 / 672; margin: 14px 14px 0; border-radius: 18px; overflow: hidden; background: #F2EFE9 url(media/mappa-murattiano.jpg) center / cover; }
+.new .map::before { content: ''; position: absolute; inset: 0; background: rgba(10, 23, 26, .12); }
 .map-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.old .blk { fill: #F6F4EF; }
-.new .blk { fill: #17302F; }
-.old .blk.park { fill: #CFE3D5; }
-.new .blk.park { fill: #1F4A39; }
-.route { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.old .route { stroke: var(--pink); stroke-dasharray: 1; }
-.new .route { stroke: var(--em400); }
+.route { fill: none; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.old .route { stroke: var(--pink); }
+.new .route { stroke: var(--em500); }
 .vs.in .old .route { transition: stroke-dashoffset 2.4s linear .9s; stroke-dashoffset: 0; }
 .vs.in .new .route { transition: stroke-dashoffset .9s var(--ease) 1.2s; stroke-dashoffset: 0; }
 
-/* pins */
-.pin { position: absolute; width: 0; height: 0; }
-.pin i { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 12px/1 var(--body); color: var(--white); transform: scale(0); transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(.9s + var(--d)); }
-.pin.no i { background: var(--pink); box-shadow: 0 0 0 4px #F6F4EF; }
-.pin.no i::before { content: '✕'; }
-.pin.yes i { width: 30px; height: 30px; left: -15px; top: -15px; background: var(--em400); color: var(--pine); font-size: 15px; box-shadow: 0 0 0 5px rgba(46, 168, 105, .25); }
-.pin.yes i::before { content: '✓'; }
-.pin.me i { background: var(--pine); box-shadow: 0 0 0 4px var(--white); transition-delay: .7s; }
-.new .pin.me i { background: var(--white); box-shadow: 0 0 0 4px var(--em400); }
-.pin.me i::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid currentColor; animation: ping 2s ease-out infinite; opacity: 0; }
-.old .pin.me i::after { color: var(--pine); }
-.new .pin.me i::after { color: var(--em400); }
-@keyframes ping { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(2.6); opacity: 0; } }
-.pin em { position: absolute; left: 0; bottom: 18px; transform: translate(-50%, 6px); white-space: nowrap; padding: 5px 9px; border-radius: 8px; background: var(--ink); color: var(--white); font: 500 11px/1 var(--mono); letter-spacing: .04em; font-style: normal; opacity: 0; transition: opacity .3s, transform .4s var(--ease); transition-delay: calc(1s + var(--d)); }
-.pin em:empty { display: none; }
-.vs.in .pin i { transform: scale(1); }
+/* store pins: the app's StorePin (charcoal drop, white hole; emerald when it is the one) */
+.pin { position: absolute; width: 0; height: 0; z-index: 1; }
+.pin svg { position: absolute; left: -12px; top: -31px; width: 24px; height: 31px; fill: #55585A; filter: drop-shadow(0 2px 2px rgba(17, 17, 15, .18)); }
+.pin.yes svg { left: -15px; top: -38px; width: 30px; height: 38px; fill: var(--em500); transform: scale(0); transform-origin: 50% 100%; transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(.9s + var(--d)); }
+.pin.no::after, .pin.yes::after { position: absolute; left: 4px; top: -36px; width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center; font: 800 10px/1 var(--body); color: var(--white); box-shadow: 0 0 0 2px var(--white); transform: scale(0); transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(.9s + var(--d)); }
+.pin.no::after { content: '✕'; background: var(--pink); }
+.pin.yes::after { content: '✓'; left: 6px; top: -44px; background: var(--pine); }
+.vs.in .pin.yes svg, .vs.in .pin.no::after, .vs.in .pin.yes::after { transform: none; }
+.pin em { position: absolute; left: 0; bottom: 36px; transform: translate(-50%, 6px); white-space: nowrap; padding: 5px 9px; border-radius: 8px; background: var(--ink); color: var(--white); font: 500 11px/1 var(--mono); letter-spacing: .04em; font-style: normal; opacity: 0; transition: opacity .3s, transform .4s var(--ease); transition-delay: calc(1s + var(--d)); }
 .vs.in .pin em { opacity: 1; transform: translate(-50%, 0); }
 
+/* my position: the app's MyPosDot */
+.mypos { position: absolute; width: 0; height: 0; z-index: 2; }
+.mypos i { position: absolute; left: -15px; top: -15px; width: 30px; height: 30px; border-radius: 50%; background: rgba(42, 111, 224, .22); }
+.mypos i::after { content: ''; position: absolute; left: 6px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #2A6FE0; border: 3px solid var(--white); }
+.osm { position: absolute; left: 0; bottom: 0; padding: 2px 6px; border-top-right-radius: 6px; background: rgba(255, 255, 255, .8); color: #555; font: 400 10px/1.3 var(--body); }
+
 /* the item waiting in the right store */
-.map-card { position: absolute; right: 5%; bottom: calc(27% + 26px); display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 14px; background: var(--white); color: var(--ink); box-shadow: 0 18px 40px rgba(0, 0, 0, .35); transform: translateY(14px) scale(.9); opacity: 0; transition: opacity .5s var(--ease) 2.4s, transform .6s cubic-bezier(.3, 1.4, .5, 1) 2.4s; }
+.map-card { position: absolute; z-index: 3; right: 3%; bottom: 5%; max-width: 44%; display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 14px; background: var(--white); color: var(--ink); box-shadow: 0 18px 40px rgba(0, 0, 0, .35); transform: translateY(14px) scale(.9); opacity: 0; transition: opacity .5s var(--ease) 2.4s, transform .6s cubic-bezier(.3, 1.4, .5, 1) 2.4s; }
 .map-card img { width: 42px; height: 52px; object-fit: cover; border-radius: 8px; background: var(--img-bg); }
-.map-card b { display: block; font: 700 13px/1.2 var(--display); white-space: nowrap; }
-.map-card small { display: block; margin-top: 3px; font-size: 12px; color: var(--em500); white-space: nowrap; }
+.map-card b { display: block; font: 700 13px/1.2 var(--display); }
+.map-card small { display: block; margin-top: 3px; font-size: 12px; line-height: 1.25; color: var(--em500); }
 .vs.in .map-card { opacity: 1; transform: none; }
 
-.time { position: absolute; right: 12px; top: 12px; padding: 7px 11px; border-radius: 999px; font: 500 12px/1 var(--mono); }
+.time { position: absolute; z-index: 3; right: 12px; top: 12px; padding: 7px 11px; border-radius: 999px; font: 500 12px/1 var(--mono); }
 .old .time { background: var(--white); color: var(--pink); }
 .new .time { background: var(--em400); color: var(--pine); }
 
@@ -358,9 +353,9 @@ figure { margin: 0; }
 .vs.in .vs-badge { transform: none; }
 
 @media (max-width: 440px) {
-  .vs .time { top: auto; bottom: 10px; right: 10px; font-size: 11px; }
+  .vs .time { font-size: 11px; }
   .vs .map-card { padding: 6px 10px 6px 6px; gap: 8px; }
-  .vs .map-card img { width: 32px; height: 40px; }
+  .vs .map-card img { display: none; }
   .vs .map-card b { font-size: 12px; }
   .vs .map-card small { font-size: 11px; }
   .vs .pin em { font-size: 10px; padding: 4px 7px; bottom: 15px; }
@@ -680,7 +675,6 @@ html { scroll-padding-top: var(--bar); }
 @media (prefers-reduced-motion: reduce) {
   .row, .tk, .rings i, .caret { animation: none; }
   .float, .scr, .reveal .w, .f-filter li i, .f-filter li i::after, .f-filter .go { transition: none; }
-  .vs-card, .route, .pin i, .pin em, .map-card, .vs-badge { transition: none !important; }
-  .pin.me i::after { animation: none; }
+  .vs-card, .route, .pin svg, .pin::after, .pin em, .map-card, .vs-badge { transition: none !important; }
   .float.on .card, .f-zero.on .card, .f-store em i, .chip.avail .k i { animation: none; }
 }
