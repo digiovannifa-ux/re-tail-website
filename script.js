@@ -49,7 +49,13 @@
     pill?.classList.toggle('away', p < 1);
     const y = p * innerHeight;
     // `translate` composes with the CSS `transform` used by the entrance animation.
-    parallax.forEach((el) => (el.style.translate = `0 ${(+el.dataset.par * y).toFixed(1)}px`));
+    // Never past the edge of the sticky scene (it clips): a giant title drifting out gets cut off.
+    parallax.forEach((el) => {
+      const box = el.offsetParent;
+      const room = el.dataset.par > 0 ? box.clientHeight - el.offsetTop - el.offsetHeight - 8 : el.offsetTop - 8;
+      const d = clamp(+el.dataset.par * y, -Math.max(0, room), Math.max(0, room));
+      el.style.translate = `0 ${d.toFixed(1)}px`;
+    });
     phone.style.transform = `translate(-50%, -50%) rotate(${(-4 + p * 8).toFixed(2)}deg)`;
 
     const m = progress(manifesto);

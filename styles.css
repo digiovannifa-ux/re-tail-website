@@ -148,7 +148,7 @@ figure { margin: 0; }
 @keyframes ring { 0% { width: 46vmin; height: 46vmin; opacity: 1; } 100% { width: 130vmin; height: 130vmin; opacity: 0; } }
 .giant {
   position: absolute; z-index: 1;
-  font: 800 clamp(43px, 7vw, 130px)/0.88 var(--display);
+  font: 800 clamp(43px, min(7vw, 11.5vh), 130px)/0.88 var(--display); /* 11.5vh: on short windows it would reach the cards */
   letter-spacing: -0.055em; word-spacing: 0.1em; text-transform: uppercase;
   color: var(--pine);
   will-change: transform;
@@ -201,7 +201,7 @@ figure { margin: 0; }
 .float small { display: block; }
 
 /* 1 · search filters that switch on one by one */
-.f-filter { right: calc(50% + var(--pw) / 2 + var(--gap)); top: 32vh; }
+.f-filter { right: calc(50% + var(--pw) / 2 + var(--gap)); top: min(32vh, calc(100% - 9vh - 170px - 98px * var(--k) - 150px * var(--k))); }
 .f-filter .card { background: var(--pine); color: var(--white); width: 230px; --d: .4s; }
 .f-filter .tag { color: var(--mint200); opacity: .7; }
 .f-filter ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
@@ -218,7 +218,8 @@ figure { margin: 0; }
 .f-filter.on .go { opacity: 1; transform: none; }
 
 /* 2 · the item, found */
-.f-prod { right: calc(50% + var(--pw) / 2 + var(--gap) + 40px); top: calc(32vh + 204px * var(--k)); }
+/* kept above the sentence and buttons at the bottom left (.hero-sub, about 155px tall), however short the window */
+.f-prod { right: calc(50% + var(--pw) / 2 + var(--gap) + 40px); top: min(calc(32vh + 204px * var(--k)), calc(100% - 9vh - 170px - 88px * var(--k))); }
 .f-prod .card { display: flex; gap: 12px; align-items: center; padding: 8px 18px 8px 8px; --d: 1.2s; }
 .f-prod img { width: 56px; height: 70px; object-fit: cover; border-radius: 10px; }
 .f-prod .badge { display: inline-block; font: 700 10px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; font-style: normal; color: var(--white); background: var(--pink); padding: 5px 8px; border-radius: 999px; margin-bottom: 7px; }
@@ -227,7 +228,7 @@ figure { margin: 0; }
 
 /* 3 · the store, open now */
 .f-store { left: calc(50% + var(--pw) / 2 + var(--gap)); top: 26vh; }
-.f-store .card { display: flex; gap: 11px; align-items: center; padding: 10px 12px 10px 10px; --d: .8s; }
+.f-store .card { display: flex; gap: 11px; align-items: center; padding: 10px 12px 10px 10px; --d: .8s; max-width: none; }
 .av { width: 40px; height: 40px; border-radius: 50%; background: var(--em500); color: var(--white); display: grid; place-items: center; font: 700 13px var(--display); flex: none; }
 .av.logo { border-radius: 10px; background: var(--white); object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
 .f-store b, .f-store small { white-space: nowrap; }
