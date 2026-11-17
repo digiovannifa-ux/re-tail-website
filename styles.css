@@ -647,62 +647,97 @@ html { scroll-padding-top: var(--bar); }
 }
 
 /* ---------- SIGN IN AND STORE AREA (accedi.html, area-negozi.html) ----------
-   A campaign photo over the whole window (three brands fading one into the other on accedi.html, the real
-   stores on area-negozi.html) and one sign-in card on top, on the right so it leaves the people visible. */
-.door { position: relative; display: flex; align-items: center; justify-content: flex-end; min-height: calc(100vh - var(--bar)); min-height: calc(100svh - var(--bar)); margin-top: var(--bar); padding: 48px max(24px, 7vw); overflow: hidden; background: var(--pine); }
-.door-bg { position: absolute; inset: 0; }
-.door-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: door-fade 21s infinite; }
-.door-bg img:nth-child(2) { animation-delay: 7s; }
-.door-bg img:nth-child(3) { animation-delay: 14s; }
-.door-bg.cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
-.door-bg.cols img { position: static; opacity: 1; animation: door-zoom 24s ease-in-out infinite alternate; }
-.door-bg.cols img:nth-child(even) { animation-delay: -12s; }
-.door-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 34, 38, .05) 30%, rgba(15, 34, 38, .55) 100%), linear-gradient(0deg, rgba(15, 34, 38, .45), rgba(15, 34, 38, 0) 35%); }
-.shop .door-bg::after { background: linear-gradient(90deg, rgba(15, 34, 38, .35), rgba(15, 34, 38, .8)); }
-@keyframes door-fade { 0% { opacity: 0; transform: scale(1.04); } 5%, 33% { opacity: 1; } 38%, 100% { opacity: 0; transform: scale(1.12); } }
-@keyframes door-zoom { from { transform: scale(1.02); } to { transform: scale(1.1); } }
-.door-cap { position: absolute; z-index: 1; left: max(24px, 7vw); bottom: 36px; margin: 0; display: grid; color: var(--white); }
-.door-cap span { grid-area: 1 / 1; font: 800 clamp(28px, 3.4vw, 48px)/1 var(--display); letter-spacing: -0.04em; opacity: 0; animation: door-cap 21s infinite; }
-.door-cap span:nth-child(2) { animation-delay: 7s; }
-.door-cap span:nth-child(3) { animation-delay: 14s; }
-.door-cap span:only-of-type { opacity: 1; animation: none; font-size: clamp(18px, 1.6vw, 22px); letter-spacing: -0.02em; }
-.door-cap em { margin-top: 10px; font: 500 12px/1 var(--mono); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: #9FF0C4; }
-@keyframes door-cap { 0%, 3% { opacity: 0; transform: translateY(10px); } 7%, 31% { opacity: 1; transform: none; } 36%, 100% { opacity: 0; } }
-.door-card { position: relative; z-index: 2; width: 100%; max-width: 440px; padding: 40px 38px 30px; border-radius: 28px; background: rgba(255, 255, 255, .96); box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .6); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
-.door-card .logo { font-size: 26px; color: var(--pine); text-decoration: none; }
-.door-kick { display: block; margin-top: 26px; font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--em600); }
-.door-card h1 { margin-top: 26px; font: 800 34px/1.05 var(--display); letter-spacing: -0.04em; color: var(--pine); }
-.door-kick + h1 { margin-top: 10px; }
-.door-lead { margin-top: 12px; font-size: 15.5px; line-height: 1.5; color: var(--text2); }
-.door-btn { display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; margin-top: 26px; border-radius: 999px; background: var(--pine); color: var(--white); text-decoration: none; font: 700 15px/1 var(--display); transition: background .2s, transform .3s var(--ease); }
-.door-btn:hover { background: var(--em500); transform: translateY(-1px); }
-.door-btn svg { transition: transform .3s var(--ease); }
-.door-btn:hover svg { transform: translateX(3px); }
-.door-btn.ghost { margin-top: 0; background: transparent; color: var(--pine); box-shadow: inset 0 0 0 1.5px var(--border); }
-.door-btn.ghost:hover { background: var(--mint50); box-shadow: inset 0 0 0 1.5px var(--em400); }
-.door-btn:focus-visible { outline: 3px solid var(--em400); outline-offset: 3px; }
-.door-ways { margin-top: 10px; font-size: 13px; text-align: center; color: var(--text3); }
-.door-or { display: flex; align-items: center; gap: 14px; margin: 22px 0 16px; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
-.door-or::before, .door-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-.door-facts { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0; margin: 14px 0 0; }
-.door-facts li { display: grid; gap: 2px; padding: 10px 8px; border-radius: 14px; background: var(--mint50); text-align: center; font-size: 12px; line-height: 1.25; color: var(--text2); }
-.door-facts b { font: 800 16px/1.1 var(--display); color: var(--pine); }
-.door-foot { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; text-align: center; color: var(--text2); }
-.door-foot a { color: var(--em600); font-weight: 700; text-decoration: none; }
-.door-foot a:hover { text-decoration: underline; }
+   A poster: one giant word with campaign photos (stores on area-negozi.html) moving inside the letters, a
+   spinning badge that is the way in, stickers from the app floating around, the buttons, and the brands
+   (or stores) running along the bottom. */
+.poster { position: relative; display: grid; grid-template-columns: 1fr auto; grid-template-rows: 1fr auto auto; align-items: end; column-gap: 48px; min-height: calc(100vh - var(--bar)); min-height: calc(100svh - var(--bar)); margin-top: var(--bar); padding: 28px max(24px, 5vw) 0; overflow: hidden; background: radial-gradient(60% 70% at 90% 10%, rgba(241, 159, 203, .45), rgba(241, 159, 203, 0) 70%), radial-gradient(50% 60% at 0% 90%, rgba(46, 168, 105, .18), rgba(46, 168, 105, 0) 70%), #FBF3F6; color: var(--pine); }
+.pz-word { grid-column: 1 / -1; position: relative; align-self: center; display: grid; font: 800 clamp(96px, 21vw, 380px)/.8 var(--display); letter-spacing: -0.065em; text-transform: uppercase; white-space: nowrap; user-select: none; }
+.pz-word span { grid-area: 1 / 1; padding: .04em .02em .06em; }
+.pz-word .ghost { color: transparent; -webkit-text-stroke: 2px rgba(15, 34, 38, .14); }
+.pz-word span[style] { background: var(--img) center 35% / cover; -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; animation: pz-fade 18s infinite, pz-pan 18s ease-in-out infinite alternate; }
+.pz-word span[style]:nth-of-type(3) { animation-delay: 6s, 6s; }
+.pz-word span[style]:nth-of-type(4) { animation-delay: 12s, 12s; }
+@keyframes pz-fade { 0% { opacity: 0; } 4%, 33% { opacity: 1; } 38%, 100% { opacity: 0; } }
+@keyframes pz-pan { from { background-position: 30% 30%; background-size: 110%; } to { background-position: 70% 50%; background-size: 130%; } }
+.pz-badge { position: absolute; z-index: 3; top: clamp(20px, 6vh, 70px); right: max(24px, 5vw); display: grid; place-items: center; width: clamp(120px, 11vw, 170px); aspect-ratio: 1; border-radius: 50%; background: var(--pine); color: var(--white); text-decoration: none; box-shadow: 0 26px 50px -18px rgba(15, 34, 38, .55); transition: transform .4s var(--ease), background .2s; }
+.pz-badge:hover { transform: scale(1.06) rotate(-6deg); background: var(--pink); }
+.pz-badge .ring { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); animation: pz-spin 16s linear infinite; }
+.pz-badge text { font: 700 14px var(--mono); letter-spacing: .12em; fill: currentColor; }
+.pz-badge .core { display: grid; place-items: center; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--pink); transition: background .2s; }
+.pz-badge:hover .core { background: var(--pine); }
+.pz-badge:focus-visible { outline: 3px solid var(--em400); outline-offset: 4px; }
+@keyframes pz-spin { to { transform: rotate(360deg); } }
+.pz-st { position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 16px; background: var(--white); color: var(--pine); box-shadow: 0 22px 44px -18px rgba(15, 34, 38, .4); font: 700 14px/1.25 var(--display); animation: pz-bob 6s ease-in-out infinite; }
+.pz-st small { display: block; font: 500 10.5px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--em600); }
+.pz-st small i { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--em400); vertical-align: 1px; animation: pulse 1.6s infinite; }
+.pz-st b { display: block; font-weight: 700; }
+.st1 { top: 9%; left: 6%; rotate: -4deg; padding: 8px 16px 8px 8px; }
+.st1 img { width: 44px; height: 56px; border-radius: 10px; object-fit: cover; background: var(--img-bg); }
+.st1 .bell { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--mint100); color: var(--em600); }
+.st2 { top: 42%; left: 38%; display: grid; gap: 2px; padding: 12px 18px; rotate: 5deg; background: var(--pine); color: var(--white); animation-delay: -2s; }
+.st2 small { color: #9FF0C4; }
+.st2 b { font-size: 22px; letter-spacing: .02em; }
+.st2 > span { font: 500 12px/1 var(--body); color: rgba(255, 255, 255, .7); }
+.st2 .step { display: flex; align-items: center; gap: 12px; }
+.st2 .step em { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255, 255, 255, .14); font: 700 15px/1 var(--body); font-style: normal; }
+.st3 { top: 14%; left: 52%; rotate: 3deg; color: var(--pink); animation-delay: -4s; }
+.st3 svg { flex: none; }
+.st4 { top: 46%; right: 20%; rotate: -6deg; padding: 14px 18px; background: var(--pink); color: var(--white); font-size: 16px; animation-delay: -3s; }
+@keyframes pz-bob { 50% { translate: 0 -9px; } }
+.pz-copy { position: relative; z-index: 2; padding-bottom: 34px; }
+.pz-copy h1 { font: 800 clamp(34px, 4vw, 60px)/1 var(--display); letter-spacing: -0.045em; }
+.pz-copy p { max-width: 520px; margin-top: 14px; font-size: 17px; color: var(--text2); }
+.pz-actions { position: relative; z-index: 2; display: grid; gap: 10px; width: 340px; padding-bottom: 34px; }
+.pz-btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 58px; padding: 0 22px 0 26px; border-radius: 999px; background: var(--pine); color: var(--white); text-decoration: none; font: 700 15.5px/1 var(--display); transition: background .2s, transform .3s var(--ease); }
+.pz-btn:hover { background: var(--pink); transform: translateX(4px); }
+.pz-btn.ghost { background: rgba(255, 255, 255, .7); color: var(--pine); box-shadow: inset 0 0 0 1.5px rgba(15, 34, 38, .16); }
+.pz-btn.ghost:hover { background: var(--white); box-shadow: inset 0 0 0 1.5px var(--pine); }
+.pz-btn:focus-visible { outline: 3px solid var(--em400); outline-offset: 3px; }
+.pz-aside { margin-top: 4px; font-size: 14px; color: var(--text2); text-align: center; }
+.pz-aside a { color: var(--em600); font-weight: 700; text-decoration: none; }
+.pz-mq { grid-column: 1 / -1; margin: 0 calc(-1 * max(24px, 5vw)); padding: 16px 0; overflow: hidden; background: var(--pine); color: var(--white); }
+.pz-mq div { display: flex; width: max-content; animation: slide 40s linear infinite; }
+.pz-mq span, .pz-mq i { padding: 0 18px; font: 800 22px/1 var(--display); letter-spacing: -0.02em; text-transform: uppercase; white-space: nowrap; font-style: normal; }
+.pz-mq span:nth-of-type(even) { color: transparent; -webkit-text-stroke: 1.2px var(--white); }
+.pz-mq i { color: var(--em400); padding: 0; }
+/* The store area: same poster on the dark ground. */
+.poster.shop { background: radial-gradient(60% 70% at 90% 10%, rgba(46, 168, 105, .35), rgba(46, 168, 105, 0) 70%), radial-gradient(50% 60% at 0% 90%, rgba(215, 91, 160, .25), rgba(215, 91, 160, 0) 70%), var(--pine); color: var(--white); }
+.shop .pz-word .ghost { -webkit-text-stroke-color: rgba(255, 255, 255, .16); }
+.shop .pz-copy h1 .g { color: var(--em400); }
+.shop .pz-copy p, .shop .pz-aside { color: rgba(255, 255, 255, .7); }
+.shop .pz-aside a { color: #9FF0C4; }
+.shop .pz-badge { background: var(--white); color: var(--pine); }
+.shop .pz-badge:hover { background: var(--pink); color: var(--white); }
+.shop .pz-btn { background: var(--white); color: var(--pine); }
+.shop .pz-btn:hover { background: var(--pink); color: var(--white); }
+.shop .pz-btn.ghost { background: rgba(255, 255, 255, .06); color: var(--white); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .25); }
+.shop .pz-btn.ghost:hover { background: rgba(255, 255, 255, .12); box-shadow: inset 0 0 0 1.5px var(--white); }
+.shop .pz-mq { background: var(--pink); }
+.shop .st2 { background: var(--white); color: var(--pine); }
+.shop .st2 small { color: var(--em600); }
+.shop .st2 > span { color: var(--text2); }
+.shop .st2 .step em { background: var(--mint100); color: var(--em600); }
+.shop .st3 { color: var(--em600); }
+.shop .pz-word span[style] { background-size: cover; }
+@media (max-width: 1100px) {
+  .st2 { left: 30%; } .st3 { left: 46%; } .st4 { right: 6%; }
+}
 @media (max-width: 860px) {
-  .door { justify-content: center; align-items: flex-end; padding: 46vh 16px 24px; }
-  .door-bg { bottom: auto; height: 62vh; }
-  .door-bg.cols { grid-template-columns: repeat(2, 1fr); }
-  .door-bg::after { background: linear-gradient(0deg, var(--pine) 0%, rgba(15, 34, 38, 0) 55%); }
-  .shop .door-bg::after { background: linear-gradient(0deg, var(--pine) 0%, rgba(15, 34, 38, .35) 60%); }
-  .door-cap { left: 20px; top: calc(46vh - 92px); bottom: auto; }
-  .door-card { padding: 30px 22px 22px; border-radius: 24px; }
-  .door-card h1 { font-size: 28px; }
+  .poster { grid-template-columns: 1fr; grid-template-rows: auto; align-items: start; padding-top: 150px; }
+  .pz-word { font-size: 25vw; margin-top: 10px; }
+  .pz-badge { top: 24px; right: 20px; width: 112px; }
+  .pz-copy { padding-bottom: 20px; }
+  .pz-copy p { font-size: 16px; }
+  .pz-actions { width: auto; }
+  .st1 { top: 22px; left: 16px; max-width: calc(100% - 156px); font-size: 13px; }
+  .st1 small, .st1 b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .st1 > span { min-width: 0; }
+  .st2, .st4 { display: none; }
+  .st3 { top: 104px; left: 16px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .door-bg img, .door-bg.cols img, .door-cap span { animation: none; }
-  .door-bg img:first-child, .door-cap span:first-child { opacity: 1; }
+  .pz-word span[style], .pz-badge .ring, .pz-st, .pz-mq div, .pz-st small i { animation: none; }
+  .pz-word span[style]:nth-of-type(2) { opacity: 1; }
 }
 
 /* ---------- 404 ---------- */
