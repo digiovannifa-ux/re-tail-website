@@ -646,93 +646,63 @@ html { scroll-padding-top: var(--bar); }
   .gate-lead { font-size: 16px; }
 }
 
-/* ---------- SIGN IN (accedi.html) ---------- */
-.sign { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(24px, 4vw, 72px); min-height: calc(100vh - var(--bar)); min-height: calc(100svh - var(--bar)); margin-top: var(--bar); padding: 56px max(24px, 6vw); overflow: hidden; background: radial-gradient(55% 70% at 85% 30%, rgba(241, 159, 203, .35), rgba(241, 159, 203, 0) 70%), radial-gradient(60% 60% at 10% 100%, rgba(46, 168, 105, .14), rgba(46, 168, 105, 0) 70%), var(--wash); }
-.sign-copy { max-width: 560px; justify-self: end; width: 100%; }
-.sign h1 { margin-top: 16px; font: 800 clamp(44px, 5.4vw, 84px)/.95 var(--display); letter-spacing: -0.05em; color: var(--pine); }
-.sign-lead { margin-top: 20px; max-width: 470px; font-size: 18px; color: var(--text2); }
-.sign-choices { display: grid; gap: 12px; margin-top: 34px; }
-.choice { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 22px; text-decoration: none; color: var(--pine); background: var(--white); box-shadow: 0 1px 0 rgba(15, 34, 38, .04), 0 10px 30px -12px rgba(15, 34, 38, .18); transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .2s; }
-.choice:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -18px rgba(15, 34, 38, .32); }
-.choice .ic { flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--mint100); color: var(--em600); }
-.choice .tx { flex: 1; display: grid; gap: 3px; }
-.choice b { font: 700 19px/1.2 var(--display); letter-spacing: -0.02em; }
-.choice small { font-size: 14.5px; line-height: 1.4; color: var(--text2); }
-.choice .go { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--mint50); color: var(--em600); transition: transform .35s var(--ease), background .2s, color .2s; }
-.choice:hover .go { transform: translateX(4px); background: var(--em400); color: var(--white); }
-.choice.main { background: var(--pine); color: var(--white); }
-.choice.main .ic { background: rgba(255, 255, 255, .1); color: #9FF0C4; }
-.choice.main small { color: rgba(255, 255, 255, .72); }
-.choice.main .go { background: var(--pink); color: var(--white); }
-.choice.main:hover .go { background: #E46FB0; }
-.choice:focus-visible { outline: 3px solid var(--em400); outline-offset: 3px; }
-.sign-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 22px 0 0; }
-.sign-facts li { padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .6); font-size: 14px; color: var(--text2); }
-.sign-facts b { color: var(--pine); }
-.sign-aside { margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(15, 34, 38, .12); font-size: 15px; color: var(--text2); }
-.sign-aside a { color: var(--em600); font-weight: 700; text-decoration: none; }
-.sign-aside a:hover { text-decoration: underline; }
-.sign-visual { position: relative; display: flex; justify-content: center; }
-.sign-stage { position: relative; }
-.sign-stage .device { --w: clamp(250px, 23vw, 330px); transform: rotate(3deg); }
-.sticker { position: absolute; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; border-radius: 18px; background: var(--white); box-shadow: 0 22px 44px -16px rgba(15, 34, 38, .35); animation: sway 6s ease-in-out infinite alternate; }
-.sticker b { display: block; font: 700 15px/1.25 var(--display); color: var(--pine); }
-.sticker small { display: block; font: 500 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--em600); }
-.s-stock { top: 16%; left: -38%; transform: rotate(-4deg); }
-.s-stock img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
-.s-stock small::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--em400); box-shadow: 0 0 0 3px rgba(46, 168, 105, .22); vertical-align: 1px; }
-.s-pink { top: 52%; right: -30%; padding: 16px 18px; background: var(--pink); transform: rotate(5deg); animation-delay: -2s; }
-.s-pink b { color: var(--white); font-size: 16px; }
-.s-qr { bottom: 6%; left: -34%; transform: rotate(-2deg); animation-delay: -4s; }
-.s-qr img { width: 84px; height: 84px; padding: 5px; border-radius: 10px; box-shadow: 0 0 0 1px var(--line); }
-.s-qr small { max-width: 120px; margin-top: 3px; font: 400 12.5px/1.3 var(--body); letter-spacing: 0; text-transform: none; color: var(--text2); }
-/* The store area (area-negozi.html): the same page on the dark pine ground. */
-.sign.shop { background: radial-gradient(55% 70% at 85% 30%, rgba(46, 168, 105, .28), rgba(46, 168, 105, 0) 70%), radial-gradient(50% 60% at 0% 100%, rgba(215, 91, 160, .22), rgba(215, 91, 160, 0) 70%), var(--pine); color: var(--white); }
-.sign.shop .eyebrow { color: #9FF0C4; }
-.sign.shop h1 { color: var(--white); font-size: clamp(42px, 4.6vw, 70px); }
-.sign.shop h1 .g { color: var(--em400); }
-.sign.shop .sign-lead { color: rgba(255, 255, 255, .72); }
-.sign.shop .choice { background: rgba(255, 255, 255, .07); color: var(--white); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
-.sign.shop .choice:hover { background: rgba(255, 255, 255, .11); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), 0 22px 44px -18px rgba(0, 0, 0, .5); }
-.sign.shop .choice .ic { background: rgba(255, 255, 255, .1); color: #9FF0C4; }
-.sign.shop .choice small { color: rgba(255, 255, 255, .66); }
-.sign.shop .choice .go { background: rgba(255, 255, 255, .1); color: var(--white); }
-.sign.shop .choice.main { background: var(--white); color: var(--pine); box-shadow: 0 22px 44px -18px rgba(0, 0, 0, .55); }
-.sign.shop .choice.main .ic { background: var(--mint100); color: var(--em600); }
-.sign.shop .choice.main small { color: var(--text2); }
-.sign.shop .choice.main .go { background: var(--pink); color: var(--white); }
-.sign.shop .sign-facts li { background: rgba(255, 255, 255, .08); color: rgba(255, 255, 255, .7); }
-.sign.shop .sign-facts b { color: var(--white); }
-.sign.shop .sign-aside { border-top-color: rgba(255, 255, 255, .14); color: rgba(255, 255, 255, .66); }
-.sign.shop .sign-aside a { color: #9FF0C4; }
-.sign.shop .sticker { box-shadow: 0 24px 48px -16px rgba(0, 0, 0, .55); }
-.sticker .bell { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--mint100); color: var(--em600); }
-.s-size { padding: 12px 16px; }
-.stepper { display: flex !important; align-items: center; gap: 10px; margin-top: 4px; }
-.stepper em { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--mint100); color: var(--em600); font: 700 16px/1 var(--body); font-style: normal; }
-@keyframes sway { from { translate: 0 0; } to { translate: 0 -10px; } }
-@media (max-width: 1100px) {
-  .s-stock { left: -30%; } .s-pink { right: -22%; } .s-qr { left: -26%; }
-}
+/* ---------- SIGN IN AND STORE AREA (accedi.html, area-negozi.html) ----------
+   A campaign photo over the whole window (three brands fading one into the other on accedi.html, the real
+   stores on area-negozi.html) and one sign-in card on top, on the right so it leaves the people visible. */
+.door { position: relative; display: flex; align-items: center; justify-content: flex-end; min-height: calc(100vh - var(--bar)); min-height: calc(100svh - var(--bar)); margin-top: var(--bar); padding: 48px max(24px, 7vw); overflow: hidden; background: var(--pine); }
+.door-bg { position: absolute; inset: 0; }
+.door-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: door-fade 21s infinite; }
+.door-bg img:nth-child(2) { animation-delay: 7s; }
+.door-bg img:nth-child(3) { animation-delay: 14s; }
+.door-bg.cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.door-bg.cols img { position: static; opacity: 1; animation: door-zoom 24s ease-in-out infinite alternate; }
+.door-bg.cols img:nth-child(even) { animation-delay: -12s; }
+.door-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 34, 38, .05) 30%, rgba(15, 34, 38, .55) 100%), linear-gradient(0deg, rgba(15, 34, 38, .45), rgba(15, 34, 38, 0) 35%); }
+.shop .door-bg::after { background: linear-gradient(90deg, rgba(15, 34, 38, .35), rgba(15, 34, 38, .8)); }
+@keyframes door-fade { 0% { opacity: 0; transform: scale(1.04); } 5%, 33% { opacity: 1; } 38%, 100% { opacity: 0; transform: scale(1.12); } }
+@keyframes door-zoom { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+.door-cap { position: absolute; z-index: 1; left: max(24px, 7vw); bottom: 36px; margin: 0; display: grid; color: var(--white); }
+.door-cap span { grid-area: 1 / 1; font: 800 clamp(28px, 3.4vw, 48px)/1 var(--display); letter-spacing: -0.04em; opacity: 0; animation: door-cap 21s infinite; }
+.door-cap span:nth-child(2) { animation-delay: 7s; }
+.door-cap span:nth-child(3) { animation-delay: 14s; }
+.door-cap span:only-of-type { opacity: 1; animation: none; font-size: clamp(18px, 1.6vw, 22px); letter-spacing: -0.02em; }
+.door-cap em { margin-top: 10px; font: 500 12px/1 var(--mono); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: #9FF0C4; }
+@keyframes door-cap { 0%, 3% { opacity: 0; transform: translateY(10px); } 7%, 31% { opacity: 1; transform: none; } 36%, 100% { opacity: 0; } }
+.door-card { position: relative; z-index: 2; width: 100%; max-width: 440px; padding: 40px 38px 30px; border-radius: 28px; background: rgba(255, 255, 255, .96); box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .6); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+.door-card .logo { font-size: 26px; color: var(--pine); text-decoration: none; }
+.door-kick { display: block; margin-top: 26px; font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--em600); }
+.door-card h1 { margin-top: 26px; font: 800 34px/1.05 var(--display); letter-spacing: -0.04em; color: var(--pine); }
+.door-kick + h1 { margin-top: 10px; }
+.door-lead { margin-top: 12px; font-size: 15.5px; line-height: 1.5; color: var(--text2); }
+.door-btn { display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; margin-top: 26px; border-radius: 999px; background: var(--pine); color: var(--white); text-decoration: none; font: 700 15px/1 var(--display); transition: background .2s, transform .3s var(--ease); }
+.door-btn:hover { background: var(--em500); transform: translateY(-1px); }
+.door-btn svg { transition: transform .3s var(--ease); }
+.door-btn:hover svg { transform: translateX(3px); }
+.door-btn.ghost { margin-top: 0; background: transparent; color: var(--pine); box-shadow: inset 0 0 0 1.5px var(--border); }
+.door-btn.ghost:hover { background: var(--mint50); box-shadow: inset 0 0 0 1.5px var(--em400); }
+.door-btn:focus-visible { outline: 3px solid var(--em400); outline-offset: 3px; }
+.door-ways { margin-top: 10px; font-size: 13px; text-align: center; color: var(--text3); }
+.door-or { display: flex; align-items: center; gap: 14px; margin: 22px 0 16px; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
+.door-or::before, .door-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.door-facts { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0; margin: 14px 0 0; }
+.door-facts li { display: grid; gap: 2px; padding: 10px 8px; border-radius: 14px; background: var(--mint50); text-align: center; font-size: 12px; line-height: 1.25; color: var(--text2); }
+.door-facts b { font: 800 16px/1.1 var(--display); color: var(--pine); }
+.door-foot { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; text-align: center; color: var(--text2); }
+.door-foot a { color: var(--em600); font-weight: 700; text-decoration: none; }
+.door-foot a:hover { text-decoration: underline; }
 @media (max-width: 860px) {
-  .sign { grid-template-columns: 1fr; min-height: 0; padding: 40px 20px 0; gap: 8px; }
-  .sign-copy { justify-self: stretch; }
-  .sign-lead { font-size: 16px; }
-  .choice { padding: 16px; gap: 12px; }
-  .choice .ic { width: 42px; height: 42px; }
-  .choice b { font-size: 17px; }
-  .sign-visual { height: 360px; overflow: hidden; margin: 24px -20px 0; padding-top: 30px; }
-  .sign-stage .device { --w: 240px; }
-  .s-stock { left: -26%; top: 10%; } .s-pink { right: -22%; top: 34%; }
-  .s-qr { display: none; } /* on a phone the buttons open it directly */
-}
-@media (max-width: 420px) {
-  .s-stock { left: -16%; } .s-pink { right: -14%; }
-  .sticker b { font-size: 13.5px; } .s-pink b { font-size: 14px; }
+  .door { justify-content: center; align-items: flex-end; padding: 46vh 16px 24px; }
+  .door-bg { bottom: auto; height: 62vh; }
+  .door-bg.cols { grid-template-columns: repeat(2, 1fr); }
+  .door-bg::after { background: linear-gradient(0deg, var(--pine) 0%, rgba(15, 34, 38, 0) 55%); }
+  .shop .door-bg::after { background: linear-gradient(0deg, var(--pine) 0%, rgba(15, 34, 38, .35) 60%); }
+  .door-cap { left: 20px; top: calc(46vh - 92px); bottom: auto; }
+  .door-card { padding: 30px 22px 22px; border-radius: 24px; }
+  .door-card h1 { font-size: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sticker { animation: none; }
-  .choice, .choice .go { transition: none; }
+  .door-bg img, .door-bg.cols img, .door-cap span { animation: none; }
+  .door-bg img:first-child, .door-cap span:first-child { opacity: 1; }
 }
 
 /* ---------- 404 ---------- */
