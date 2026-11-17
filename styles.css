@@ -646,6 +646,71 @@ html { scroll-padding-top: var(--bar); }
   .gate-lead { font-size: 16px; }
 }
 
+/* ---------- SIGN IN (accedi.html) ---------- */
+.sign { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(24px, 4vw, 72px); min-height: calc(100vh - var(--bar)); min-height: calc(100svh - var(--bar)); margin-top: var(--bar); padding: 56px max(24px, 6vw); overflow: hidden; background: radial-gradient(55% 70% at 85% 30%, rgba(241, 159, 203, .35), rgba(241, 159, 203, 0) 70%), radial-gradient(60% 60% at 10% 100%, rgba(46, 168, 105, .14), rgba(46, 168, 105, 0) 70%), var(--wash); }
+.sign-copy { max-width: 560px; justify-self: end; width: 100%; }
+.sign h1 { margin-top: 16px; font: 800 clamp(44px, 5.4vw, 84px)/.95 var(--display); letter-spacing: -0.05em; color: var(--pine); }
+.sign-lead { margin-top: 20px; max-width: 470px; font-size: 18px; color: var(--text2); }
+.sign-choices { display: grid; gap: 12px; margin-top: 34px; }
+.choice { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 22px; text-decoration: none; color: var(--pine); background: var(--white); box-shadow: 0 1px 0 rgba(15, 34, 38, .04), 0 10px 30px -12px rgba(15, 34, 38, .18); transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .2s; }
+.choice:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -18px rgba(15, 34, 38, .32); }
+.choice .ic { flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--mint100); color: var(--em600); }
+.choice .tx { flex: 1; display: grid; gap: 3px; }
+.choice b { font: 700 19px/1.2 var(--display); letter-spacing: -0.02em; }
+.choice small { font-size: 14.5px; line-height: 1.4; color: var(--text2); }
+.choice .go { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--mint50); color: var(--em600); transition: transform .35s var(--ease), background .2s, color .2s; }
+.choice:hover .go { transform: translateX(4px); background: var(--em400); color: var(--white); }
+.choice.main { background: var(--pine); color: var(--white); }
+.choice.main .ic { background: rgba(255, 255, 255, .1); color: #9FF0C4; }
+.choice.main small { color: rgba(255, 255, 255, .72); }
+.choice.main .go { background: var(--pink); color: var(--white); }
+.choice.main:hover .go { background: #E46FB0; }
+.choice:focus-visible { outline: 3px solid var(--em400); outline-offset: 3px; }
+.sign-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 22px 0 0; }
+.sign-facts li { padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .6); font-size: 14px; color: var(--text2); }
+.sign-facts b { color: var(--pine); }
+.sign-aside { margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(15, 34, 38, .12); font-size: 15px; color: var(--text2); }
+.sign-aside a { color: var(--em600); font-weight: 700; text-decoration: none; }
+.sign-aside a:hover { text-decoration: underline; }
+.sign-visual { position: relative; display: flex; justify-content: center; }
+.sign-stage { position: relative; }
+.sign-stage .device { --w: clamp(250px, 23vw, 330px); transform: rotate(3deg); }
+.sticker { position: absolute; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; border-radius: 18px; background: var(--white); box-shadow: 0 22px 44px -16px rgba(15, 34, 38, .35); animation: sway 6s ease-in-out infinite alternate; }
+.sticker b { display: block; font: 700 15px/1.25 var(--display); color: var(--pine); }
+.sticker small { display: block; font: 500 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--em600); }
+.s-stock { top: 16%; left: -38%; transform: rotate(-4deg); }
+.s-stock img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
+.s-stock small::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--em400); box-shadow: 0 0 0 3px rgba(46, 168, 105, .22); vertical-align: 1px; }
+.s-pink { top: 52%; right: -30%; padding: 16px 18px; background: var(--pink); transform: rotate(5deg); animation-delay: -2s; }
+.s-pink b { color: var(--white); font-size: 16px; }
+.s-qr { bottom: 6%; left: -34%; transform: rotate(-2deg); animation-delay: -4s; }
+.s-qr img { width: 84px; height: 84px; padding: 5px; border-radius: 10px; box-shadow: 0 0 0 1px var(--line); }
+.s-qr small { max-width: 120px; margin-top: 3px; font: 400 12.5px/1.3 var(--body); letter-spacing: 0; text-transform: none; color: var(--text2); }
+@keyframes sway { from { translate: 0 0; } to { translate: 0 -10px; } }
+@media (max-width: 1100px) {
+  .s-stock { left: -30%; } .s-pink { right: -22%; } .s-qr { left: -26%; }
+}
+@media (max-width: 860px) {
+  .sign { grid-template-columns: 1fr; min-height: 0; padding: 40px 20px 0; gap: 8px; }
+  .sign-copy { justify-self: stretch; }
+  .sign-lead { font-size: 16px; }
+  .choice { padding: 16px; gap: 12px; }
+  .choice .ic { width: 42px; height: 42px; }
+  .choice b { font-size: 17px; }
+  .sign-visual { height: 360px; overflow: hidden; margin: 24px -20px 0; padding-top: 30px; }
+  .sign-stage .device { --w: 240px; }
+  .s-stock { left: -26%; top: 10%; } .s-pink { right: -22%; top: 34%; }
+  .s-qr { display: none; } /* on a phone the buttons open it directly */
+}
+@media (max-width: 420px) {
+  .s-stock { left: -16%; } .s-pink { right: -14%; }
+  .sticker b { font-size: 13.5px; } .s-pink b { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticker { animation: none; }
+  .choice, .choice .go { transition: none; }
+}
+
 /* ---------- 404 ---------- */
 .nf { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: calc(var(--bar) + 40px) 20px 60px; background: radial-gradient(circle at 80% 20%, rgba(241, 159, 203, .25), rgba(241, 159, 203, 0) 40%), var(--wash); text-align: center; }
 .nf-in { max-width: 640px; }
