@@ -72,7 +72,8 @@
   // Scale the 402-point screen to the device's width.
   const fit = (dev) => {
     const g = dev.querySelector('.glass');
-    if (g) dev.style.setProperty('--s', (g.clientWidth / 402).toFixed(4));
+    // a hair larger than the glass, so no sub-pixel seam shows along the frame (the glass clips it)
+    if (g) dev.style.setProperty('--s', ((g.offsetWidth + 1) / 402).toFixed(4));
   };
   const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target)));
   document.querySelectorAll('.device').forEach((d) => {

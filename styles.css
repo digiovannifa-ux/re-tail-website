@@ -104,7 +104,7 @@ figure { margin: 0; }
 }
 .device::before { left: -2px; top: 22%; height: 7%; box-shadow: 0 calc(var(--w) * .2) 0 #2a2c2e; }
 .device::after { right: -2px; top: 28%; height: 11%; }
-.glass { position: relative; aspect-ratio: 402 / 874; border-radius: calc(var(--w) * .14); overflow: hidden; background: var(--white); isolation: isolate; }
+.glass { position: relative; aspect-ratio: 402 / 874; border-radius: calc(var(--w) * .14); overflow: hidden; background: #D9EBE1; isolation: isolate; }
 .glass::after { /* soft reflection */
   content: ''; position: absolute; inset: 0; z-index: 20; pointer-events: none;
   background: linear-gradient(115deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, 0) 32%);
@@ -125,8 +125,8 @@ figure { margin: 0; }
 .sb svg { fill: currentColor; }
 .sb-r { display: flex; align-items: center; gap: 6px; }
 
-.scr { position: absolute; inset: 0; background: linear-gradient(var(--top) 0 88px, var(--bottom) 88px); opacity: 0; transform: translateY(24px) scale(.985); transition: opacity .5s var(--ease), transform .7s var(--ease); }
-.scr.on { opacity: 1; transform: none; }
+.scr { position: absolute; inset: 0; background: linear-gradient(var(--top) 0 88px, var(--bottom) 88px); opacity: 0; transition: opacity .45s ease; }
+.scr.on { opacity: 1; }
 .scr .shot { position: absolute; left: 0; top: 54px; width: 402px; height: 786px; object-fit: cover; }
 .scr.dark .sb { color: var(--white); }
 
