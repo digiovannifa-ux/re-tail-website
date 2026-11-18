@@ -47,7 +47,7 @@
     // A card is shown from data-at and, if it has one, until data-to.
     floats.forEach((el) => el.classList.toggle('on', p >= +el.dataset.at && p < +(el.dataset.to || 2)));
     pill?.classList.toggle('away', p < 1);
-    const y = p * innerHeight;
+    const y = (p * innerHeight) / (window.__zoom || 1); // page pixels (zoom.js)
     // `translate` composes with the CSS `transform` used by the entrance animation.
     // Never past the edge of the sticky scene (it clips): a giant title drifting out gets cut off.
     parallax.forEach((el) => {
@@ -125,7 +125,7 @@
       return c;
     };
     const layout = () => {
-      dpr = Math.min(2, devicePixelRatio || 1);
+      dpr = Math.min(3, (devicePixelRatio || 1) * (window.__zoom || 1));
       W = pat.clientWidth; H = pat.clientHeight;
       if (!W || !H) return false;
       pat.width = W * dpr; pat.height = H * dpr;
