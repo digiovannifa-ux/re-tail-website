@@ -52,9 +52,10 @@ figure { margin: 0; }
 .dot { color: var(--em400); }
 .wrap { width: min(1200px, 100% - 40px); margin: 0 auto; }
 
-/* Wordmark: Re·Tail in Poppins ExtraBold, like the app header */
-.logo { font: 800 20px/1 var(--display); letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; }
-.logo .dot { margin: 0 0.02em; }
+/* Logo: the 3D "re." mark (brand/re-logo*.webp; the "sticker" files have a white rim for green and dark grounds) */
+a.logo, span.logo { display: inline-flex; align-items: center; text-decoration: none; line-height: 0; }
+a.logo img, span.logo img { display: block; height: 34px; width: auto; transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+a.logo:hover img { transform: rotate(-4deg) scale(1.06); }
 
 /* Floating pill nav at the bottom */
 .pill {
@@ -74,7 +75,8 @@ figure { margin: 0; }
 .pill a { text-decoration: none; }
 .pill .lnk { font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 14px; border-radius: 999px; color: var(--text2); transition: background .2s, color .2s; }
 .pill .lnk:hover { background: var(--mint100); color: var(--em600); }
-.pill .logo { font-size: 17px; padding: 10px 16px; background: var(--pine); color: var(--white); border-radius: 999px; }
+.pill .logo { padding: 0 6px; }
+.pill .logo img { height: 36px; }
 
 .btn { display: inline-flex; align-items: center; padding: 14px 20px; background: var(--pine); color: var(--white); text-decoration: none; font: 700 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; border-radius: 999px; transition: transform .3s var(--ease), background .2s; }
 .btn:hover { transform: translateY(-2px); background: var(--em600); }
@@ -429,7 +431,8 @@ figure { margin: 0; }
 /* ---------- FOOTER ---------- */
 footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
 .foot { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
-.foot .logo { font-size: clamp(48px, calc(9 * var(--vw)), 120px); display: block; letter-spacing: -0.05em; }
+.foot .logo { display: block; }
+.foot .logo img { height: clamp(90px, calc(12 * var(--vw)), 170px); }
 .foot .tag { margin-top: 18px; color: rgba(255,255,255,.65); max-width: 360px; }
 .foot h4 { font: 500 11px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--em400); margin: 0 0 18px; }
 .foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -444,6 +447,7 @@ footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
 .doc-head p { margin-top: 20px; color: var(--text2); font: 400 13px/1.5 var(--mono); }
 .topbar { position: absolute; top: 0; left: 0; right: 0; padding: 26px 0; }
 .topbar .wrap { display: flex; justify-content: space-between; align-items: center; }
+.topbar .logo img { height: 46px; }
 .topbar a.back { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--em600); }
 .doc { padding: 70px 0 140px; }
 .doc .wrap { display: grid; grid-template-columns: 240px 1fr; gap: 60px; }
@@ -521,7 +525,7 @@ footer { background: var(--pine); color: var(--white); padding: 90px 0 120px; }
 html { scroll-padding-top: var(--bar); }
 .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; color: var(--white); }
 .tb { height: var(--bar); display: flex; align-items: center; gap: 24px; padding: 0 max(20px, calc(3 * var(--vw))); background: var(--em600); box-shadow: 0 1px 0 rgba(255, 255, 255, .06), 0 8px 24px rgba(15, 34, 38, .14); }
-.tb .logo { font-size: 26px; color: var(--white); }
+.tb .logo img { height: 50px; }
 .tb .dot { color: #9FF0C4; }
 .tb-links { flex: 1; display: flex; align-items: center; gap: 24px; min-width: 0; }
 .tb-nav { display: flex; align-items: center; gap: 2px; margin: 0 auto; }
@@ -556,7 +560,7 @@ html { scroll-padding-top: var(--bar); }
 }
 @media (max-width: 1280px) {
   :root { --bar: 64px; }
-  .tb .logo { font-size: 23px; }
+  .tb .logo img { height: 44px; }
   .tb-menu { display: block; }
   .tb-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 14px; padding: 10px 16px 18px; background: var(--em600); box-shadow: 0 18px 30px rgba(15, 34, 38, .22); max-height: calc(calc(100 * var(--vh)) - var(--bar)); overflow-y: auto; }
   .tb-links.open { display: flex; }
@@ -899,3 +903,4 @@ html { scroll-padding-top: var(--bar); }
 @media (prefers-reduced-motion: reduce) {
   .pp-marq > div { animation: none; }
 }
+@media (prefers-reduced-motion: reduce) { a.logo img { transition: none; } a.logo:hover img { transform: none; } }
