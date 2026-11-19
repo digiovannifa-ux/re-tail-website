@@ -271,7 +271,7 @@ a.logo:hover img { transform: rotate(-4deg) scale(1.06); }
 /* Grid of halftone bags (canvas, script.js), like a moving print. A soft glow keeps the words readable. */
 .pattern { position: absolute; inset: 0; width: 100%; height: 100%; }
 .manifesto .stick::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 45% at 50% 52%, rgba(241, 159, 203, .94) 35%, rgba(241, 159, 203, 0)); }
-.reveal { position: relative; z-index: 2; width: min(1100px, 100% - 40px); text-align: center; text-wrap: balance; font: 800 clamp(36px, calc(9 * var(--vw)), 112px)/1 var(--display); letter-spacing: -0.045em; }
+.reveal { position: relative; z-index: 2; width: min(1100px, 100% - 40px); text-align: center; text-wrap: balance; font: 800 clamp(36px, min(calc(9 * var(--vw)), calc(12.5 * var(--vh))), 112px)/1 var(--display); letter-spacing: -0.045em; }
 .reveal .w { opacity: .18; transition: opacity .25s; }
 .reveal .w.on { opacity: 1; }
 .reveal .w.g { color: var(--em600); }
